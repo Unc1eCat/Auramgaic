@@ -1,29 +1,54 @@
 package mod.unclecat.uc_auramagic.content.block;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Nullable;
 
+import mod.unclecat.uc_auramagic.Auramagic;
 import mod.unclecat.uc_auramagic.content.Content;
+import mod.unclecat.uc_auramagic.util.helpers.BlockHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.state.StateContainer;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.state.IProperty;
+import net.minecraft.state.StateContainer.Builder;
 
 public class ModBlock extends Block
 {
-	public ModBlock(String name, Properties properties, boolean hasItem, @Nullable Item.Properties itemProperties)
+	public List<IProperty<?>> externalProperties = new ArrayList<IProperty<?>>();
+	
+	
+	
+	public ModBlock(String name, Properties properties, @Nullable ItemGroup group, @Nullable Item.Properties itemProperties)
 	{
 		super(properties);
+		setRegistryName(Auramagic.prefix(name));
 		
-		if (hasItem)
-		{
-			Content.additionalGameObjects.add(new BlockItem(this, (itemProperties == null ? new Item.Properties() : itemProperties)));
-		}
+		Content.additionalGameObjects.add(new BlockItem(this, (itemProperties == null ? new Item.Properties().group(group) : itemProperties.group(group))));
+	}
+	
+	public ModBlock(String name, Properties properties)
+	{
+		super(properties);	
+		setRegistryName(Auramagic.prefix(name));
+	}
+	
+	public void addExternalProperty(IProperty<?> property)
+	{
+		externalProperties.add(property);
 	}
 	
 	@Override
-	public StateContainer<Block, BlockState> getStateContainer()
+	protected void fillStateContainer(Builder<Block, BlockState> builder)
 	{
-		return new StateContainer<Block, BlockState>(null, null, null)
+		builder.add(BlockHelper.getPropertiesFromBlock(this).toArray(new IProperty<?>[] { }));
+	}
+	
+	public <T extends Comparable<T>> void setDefaultValue(IProperty<T> property, T value)
+	{
+		setDefaultState(getDefaultState().with(property, value));
 	}
 }

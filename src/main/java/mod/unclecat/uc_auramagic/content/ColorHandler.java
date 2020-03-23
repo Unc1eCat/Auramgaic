@@ -1,8 +1,17 @@
 package mod.unclecat.uc_auramagic.content;
 
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 import java.lang.reflect.Field;
 
+import javax.annotation.Nullable;
+
 import mod.unclecat.uc_auramagic.Auramagic;
+import mod.unclecat.uc_auramagic.content.block.content.BlockExperienceBlock;
+import mod.unclecat.uc_auramagic.content.item.content.ItemExperienceGem;
+import mod.unclecat.uc_auramagic.content.item.content.ItemExperienceShard;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
@@ -12,13 +21,25 @@ import net.minecraft.world.ILightReader;
 
 public class ColorHandler implements IItemColor, IBlockColor
 {
+	public static ColorHandler INSTANCE = new ColorHandler();
+	
+	
 	/*
 	 * Item
 	 */
 	@Override
 	public int getColor(ItemStack stack, int color)
 	{
-		return 0;
+		if (stack.getItem() instanceof ItemExperienceGem)
+		{
+			return ((ItemExperienceGem)stack.getItem()).kind.getColorMultiplier(); // TODO: Maybe you'll need to merge it with color argument
+		}
+		else if (stack.getItem() instanceof ItemExperienceShard)
+		{
+			return ((ItemExperienceShard)stack.getItem()).kind.getColorMultiplier(); // TODO: Maybe you'll need to merge it with color argument
+		}
+		
+		return color;
 	}
 		
 
@@ -26,10 +47,15 @@ public class ColorHandler implements IItemColor, IBlockColor
 	 * Block
 	 */
 	@Override
-	public int getColor(BlockState state, ILightReader lightReader, BlockPos pos, int color)
+	public int getColor(BlockState state, ILightReader light, BlockPos pos, int color)
 	{
-		return 0;
-	} 
+		if (state.getBlock() instanceof BlockExperienceBlock)
+		{
+			return ((BlockExperienceBlock)state.getBlock()).kind.getColorMultiplier(); // TODO: Maybe you'll need to merge it with color parameter
+		}
+		
+		return color;
+	}	
 	
 	
 	
@@ -73,13 +99,15 @@ public class ColorHandler implements IItemColor, IBlockColor
 	}
 	
 	/*
-	 * Indicates that its supertypes must be handled by item color handler
+	 * Indicates that its supertypes must be handled by color handler
 	 */
 	public static interface IDynamicColor { }
 	
 	/*
-	 * Indicates that its supertypes must be handled by item color handler but annotation
+	 * Indicates that object of field annotated with this annotation must be handled by color handler
 	 */
-	@interface DynamicColor { }
+	@Target(ElementType.FIELD)
+	@Retention(RetentionPolicy.RUNTIME)
+	public static @interface DynamicColor { }
 
 }
