@@ -6,8 +6,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.lang.reflect.Field;
 
-import javax.annotation.Nullable;
-
 import mod.unclecat.uc_auramagic.Auramagic;
 import mod.unclecat.uc_auramagic.content.block.content.BlockExperienceBlock;
 import mod.unclecat.uc_auramagic.content.item.content.ItemExperienceGem;

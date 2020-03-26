@@ -3,6 +3,6 @@
 	
 	"textures":
 	{
-		"layer0": "items/experience_gem"
+		"layer0": "uc_auramagic:items/experience_gem"
 	}
 }

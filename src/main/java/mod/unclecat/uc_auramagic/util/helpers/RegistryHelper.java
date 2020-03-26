@@ -91,7 +91,7 @@ public class RegistryHelper
 	
 	public static List<IItemProvider> getDynamicColorItems()
 	{
-		List<IItemProvider> list = new ArrayList<IItemProvider>();
+		List<IItemProvider> list = new ArrayList<IItemProvider>(1);
 		Field[] fields = Content.class.getDeclaredFields();
 
 		for (Field i : fields)

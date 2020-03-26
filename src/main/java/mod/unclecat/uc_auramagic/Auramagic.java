@@ -1,5 +1,7 @@
 package mod.unclecat.uc_auramagic;
 
+import java.util.function.Supplier;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -8,7 +10,12 @@ import mod.unclecat.uc_auramagic.util.helpers.RegistryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.IItemProvider;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 
 @Mod(Auramagic.MODID)
 public class Auramagic
@@ -21,8 +28,16 @@ public class Auramagic
 	{
 		LOG.debug("Hello world!");
 		
-		Minecraft.getInstance().getItemColors().register(ColorHandler.INSTANCE, ( RegistryHelper.getDynamicColorItems().toArray(new IItemProvider[] { })));
-		Minecraft.getInstance().getBlockColors().register(ColorHandler.INSTANCE, ( RegistryHelper.getDynamicColorBlocks().toArray(new Block[] { })));
+		MinecraftForge.EVENT_BUS.addListener(Auramagic::setupCommon);
+		
+		DistExecutor.runWhenOn(Dist.CLIENT, new Supplier<Runnable>()
+		{
+			@Override
+			public Runnable get()
+			{
+				return () -> MinecraftForge.EVENT_BUS.addListener(Auramagic::setupClient);
+			}
+		});
 	}
 	
 	public static String prefix(String location)
@@ -33,5 +48,16 @@ public class Auramagic
 		}
 		
 		return location;
+	}
+	
+	
+	public static void setupCommon(FMLServerStartingEvent event)
+	{
+	}
+	
+	public static void setupClient(FMLClientSetupEvent event)
+	{
+		Minecraft.getInstance().getItemColors().register(ColorHandler.INSTANCE, ( RegistryHelper.getDynamicColorItems().toArray(new IItemProvider[] { })));
+		Minecraft.getInstance().getBlockColors().register(ColorHandler.INSTANCE, ( RegistryHelper.getDynamicColorBlocks().toArray(new Block[] { })));	
 	}
 }

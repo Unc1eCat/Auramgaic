@@ -12,7 +12,7 @@ public class BlockHelper
 {
 	public static List<IProperty<?>> getPropertiesFromBlock(ModBlock block)
 	{
-		Field[] fields = block.getClass().getDeclaredFields();
+ 		Field[] fields = block.getClass().getDeclaredFields();
 		List<IProperty<?>> ret = new ArrayList<IProperty<?>>();
 		
 		for (Field i : fields)
@@ -31,7 +31,7 @@ public class BlockHelper
 			}
 		}
 		
-		if (!block.externalProperties.isEmpty()) ret.addAll(block.externalProperties);
+		if (block.externalProperties != null) ret.addAll(block.externalProperties);
 		
 		return ret;
 	}
