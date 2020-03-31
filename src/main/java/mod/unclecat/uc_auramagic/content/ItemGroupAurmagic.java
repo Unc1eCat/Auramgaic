@@ -30,6 +30,12 @@ public class ItemGroupAurmagic extends ItemGroup
 	}
 	
 	@Override
+	public ItemStack getIcon()
+	{
+		return icon[activeIcon];
+	}
+	
+	@Override
 	public String getTranslationKey()
 	{
 		return "itemGroupAuramagic.name";

@@ -17,6 +17,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ILightReader;
 
+@Deprecated
 public class ColorHandler implements IItemColor, IBlockColor
 {
 	public static ColorHandler INSTANCE = new ColorHandler();
@@ -28,15 +29,6 @@ public class ColorHandler implements IItemColor, IBlockColor
 	@Override
 	public int getColor(ItemStack stack, int color)
 	{
-		if (stack.getItem() instanceof ItemExperienceGem)
-		{
-			return ((ItemExperienceGem)stack.getItem()).kind.getColorMultiplier(); // TODO: Maybe you'll need to merge it with color argument
-		}
-		else if (stack.getItem() instanceof ItemExperienceShard)
-		{
-			return ((ItemExperienceShard)stack.getItem()).kind.getColorMultiplier(); // TODO: Maybe you'll need to merge it with color argument
-		}
-		
 		return color;
 	}
 		
@@ -47,11 +39,6 @@ public class ColorHandler implements IItemColor, IBlockColor
 	@Override
 	public int getColor(BlockState state, ILightReader light, BlockPos pos, int color)
 	{
-		if (state.getBlock() instanceof BlockExperienceBlock)
-		{
-			return ((BlockExperienceBlock)state.getBlock()).kind.getColorMultiplier(); // TODO: Maybe you'll need to merge it with color parameter
-		}
-		
 		return color;
 	}	
 	

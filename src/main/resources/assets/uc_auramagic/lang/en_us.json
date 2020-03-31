@@ -1,3 +1,30 @@
 {
-	"item.uc_auramagic.experience_gem_fire": "Fire experience gem"
+	"item.uc_auramagic.experience_gem_fire": "Ignitum experience gem",
+	"item.uc_auramagic.experience_gem_air": "Aerum experience gem",
+	"item.uc_auramagic.experience_gem_earth": "Terra experience gem",
+	"item.uc_auramagic.experience_gem_aqua": "Aqua experience gem",
+	
+	"item.uc_auramagic.experience_shard_fire": "Ignitum experience shard",
+	"item.uc_auramagic.experience_shard_air": "Aerum experience shard",
+	"item.uc_auramagic.experience_shard_earth": "Terra experience shard",
+	"item.uc_auramagic.experience_shard_aqua": "Aqua experience shard",
+	
+	"item.uc_auramagic.ruby": "Ruby",
+	"item.uc_auramagic.topaz": "Topaz",
+	"item.uc_auramagic.sapphire": "Sapphire",
+	"item.uc_auramagic.amethyst": "Amethyst",
+	"item.uc_auramagic.amber": "Amber",
+	
+	"block.uc_auramagic.ruby_ore": "Ruby ore",
+	"block.uc_auramagic.topaz_ore": "Topaz ore",
+	"block.uc_auramagic.sapphire_ore": "Sapphire ore",
+	"block.uc_auramagic.amethyst_ore": "Amethyst ore",
+	"block.uc_auramagic.amber_ore": "Amber ore",
+	
+	"block.uc_auramagic.experience_block_fire": "Ignitum experience block",
+	"block.uc_auramagic.experience_block_air": "Aerum experience block",
+	"block.uc_auramagic.experience_block_earth": "Terra experience block",
+	"block.uc_auramagic.experience_block_aqua": "Aqua experience block",
+	
+	"itemGroupAuramagic.name": "Auramagic"
 }

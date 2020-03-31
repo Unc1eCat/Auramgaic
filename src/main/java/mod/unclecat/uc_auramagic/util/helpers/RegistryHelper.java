@@ -8,8 +8,11 @@ import mod.unclecat.uc_auramagic.Auramagic;
 import mod.unclecat.uc_auramagic.content.ColorHandler;
 import mod.unclecat.uc_auramagic.content.Content;
 import net.minecraft.block.Block;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.util.IItemProvider;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 public class RegistryHelper
@@ -40,7 +43,7 @@ public class RegistryHelper
 	public static <T extends IForgeRegistryEntry<T>> void registerAllFromAdditionalsGameObjects(RegistryEvent.Register<T> event)
 	{
 		for (Object i : Content.additionalGameObjects)
-		{
+		{ 
 			try
 			{
 				if (((Class<T>)event.getGenericType()).isAssignableFrom(i.getClass()))

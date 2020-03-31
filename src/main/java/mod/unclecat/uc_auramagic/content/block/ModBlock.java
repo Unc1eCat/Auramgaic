@@ -27,7 +27,7 @@ public class ModBlock extends Block
 		super(properties);
 		setRegistryName(Auramagic.prefix(name));
 		
-		Content.additionalGameObjects.add(new BlockItem(this, (itemProperties == null ? new Item.Properties().group(group) : itemProperties.group(group))));
+		Content.additionalGameObjects.add(new BlockItem(this, (itemProperties == null ? new Item.Properties().group(group) : itemProperties.group(group))).setRegistryName(this.getRegistryName()));
 	}
 	
 	public ModBlock(String name, Properties properties)

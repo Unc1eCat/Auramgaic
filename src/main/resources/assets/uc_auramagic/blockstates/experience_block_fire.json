@@ -1,0 +1,6 @@
+{
+	"variants":
+	{
+		"": { "model": "uc_auramagic:block/experience_block_fire" }
+	}
+}
