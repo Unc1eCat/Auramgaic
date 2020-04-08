@@ -10,10 +10,14 @@ import mod.unclecat.uc_auramagic.content.experience_gem.EnumExperienceColor;
 import mod.unclecat.uc_auramagic.content.item.ModItem;
 import mod.unclecat.uc_auramagic.content.item.content.ItemExperienceGem;
 import mod.unclecat.uc_auramagic.content.item.content.ItemExperienceShard;
+import mod.unclecat.uc_auramagic.content.recipies.content.RecipeExperienceBlock;
+import mod.unclecat.uc_auramagic.content.recipies.content.RecipeExperienceShard;
 import mod.unclecat.uc_auramagic.util.helpers.RegistryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipeSerializer;
+import net.minecraft.item.crafting.SpecialRecipeSerializer;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -56,6 +60,17 @@ public class Content
 	public static CommonNoSmeltOre AMBER_ORE = new CommonNoSmeltOre("amber_ore", 3.0F, 2, new ItemStack(AMBER, 1), 3, 3);
 	public static CommonNoSmeltOre AMETHYST_ORE = new CommonNoSmeltOre("amethyst_ore", 3.0F, 2, new ItemStack(AMETHYST, 1), 3, 3);
 	
+	// Etc.
+	public static 
+	
+	
+	
+	/***** RECIPIES *****/
+	public static SpecialRecipeSerializer<RecipeExperienceShard> RECIPE_EXPERIENCE_SHARD = 
+			IRecipeSerializer.register(Auramagic.prefix("experience_shard"), new SpecialRecipeSerializer<RecipeExperienceShard>(RecipeExperienceShard::new));
+	public static SpecialRecipeSerializer<RecipeExperienceBlock> RECIPE_EXPERIENCE_BLOCK = 
+			IRecipeSerializer.register(Auramagic.prefix("experience_block"), new SpecialRecipeSerializer<RecipeExperienceBlock>(RecipeExperienceBlock::new));
+	
 	
 	@SubscribeEvent
 	public static void registerItems(RegistryEvent.Register<Item> event)
@@ -66,6 +81,13 @@ public class Content
 	
 	@SubscribeEvent
 	public static void registerBlocks(RegistryEvent.Register<Block> event)
+	{
+		RegistryHelper.registerAllViaEvent(event);
+		RegistryHelper.registerAllFromAdditionalsGameObjects(event);
+	}
+	
+	@SubscribeEvent
+	public static void registerRecipieSerializers(RegistryEvent.Register<IRecipeSerializer<?>> event)
 	{
 		RegistryHelper.registerAllViaEvent(event);
 		RegistryHelper.registerAllFromAdditionalsGameObjects(event);

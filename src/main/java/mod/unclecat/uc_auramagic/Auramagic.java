@@ -28,7 +28,7 @@ public class Auramagic
 	
 	public Auramagic()
 	{
-		LOG.debug("Aurmaagic instance has been created!");
+		LOG.info("Aurmaagic instance has been created!");
 		
 		MinecraftForge.EVENT_BUS.addListener(Auramagic::setupCommon);	
 		MinecraftForge.EVENT_BUS.addListener(Auramagic::setupClient);

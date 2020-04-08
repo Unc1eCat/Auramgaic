@@ -7,22 +7,11 @@ import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.SpecialRecipe;
-import net.minecraft.item.crafting.SpecialRecipeSerializer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import net.minecraftforge.registries.ForgeRegistries;
 
 public class RecipeExperienceShard extends SpecialRecipe
 {
-	public static SpecialRecipeSerializer<RecipeExperienceShard> SERIALIZER = new SpecialRecipeSerializer<RecipeExperienceShard>(RecipeExperienceShard::new);
-	
-		
-	static 
-	{
-		ForgeRegistries.RECIPE_SERIALIZERS.register(SERIALIZER);
-	}
-	
-	
 	public RecipeExperienceShard(ResourceLocation idIn)
 	{
 		super(idIn);
@@ -65,6 +54,6 @@ public class RecipeExperienceShard extends SpecialRecipe
 	@Override
 	public IRecipeSerializer<?> getSerializer()
 	{
-		return SERIALIZER;
+		return Content.RECIPE_EXPERIENCE_SHARD;
 	}
 }

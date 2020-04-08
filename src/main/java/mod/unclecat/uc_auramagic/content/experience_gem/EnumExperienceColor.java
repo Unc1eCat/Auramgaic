@@ -41,4 +41,12 @@ public enum EnumExperienceColor implements IKind
 	{
 		return name;
 	}
+	
+//	public static EnumExperienceColor fromMaterial(Material m)
+//	{
+//		if (m == Material.AIR
+//				|| m == Material.PORTAL
+//				|| m == Material.GLASS
+//				|| m == Material.)
+//	}
 }
