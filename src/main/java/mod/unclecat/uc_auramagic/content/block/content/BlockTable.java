@@ -1,6 +1,5 @@
 package mod.unclecat.uc_auramagic.content.block.content;
 
-import mod.unclecat.uc_auramagic.Auramagic;
 import mod.unclecat.uc_auramagic.content.ItemGroupAurmagic;
 import mod.unclecat.uc_auramagic.content.block.ModBlock;
 import mod.unclecat.uc_auramagic.content.tile_entities.ModTileEntity;
@@ -14,7 +13,6 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class BlockTable extends ModBlock
@@ -34,7 +32,10 @@ public class BlockTable extends ModBlock
 	public ActionResultType func_225533_a_(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult rayTrace) 
 	{
 		TableTileEntity te = (TableTileEntity) world.getTileEntity(pos);
-		int index = getIndexClicked(rayTrace.getHitVec());
+		
+		if (rayTrace.getHitVec().y - pos.getY() < 0.999) return ActionResultType.PASS;
+		
+		int index = getIndexClicked(rayTrace.getHitVec().x - pos.getX(), rayTrace.getHitVec().z - pos.getZ());
 		
 		//if (player.getHeldItemMainhand().getItem()) { } // TODO: Make building process...
 		
@@ -67,9 +68,16 @@ public class BlockTable extends ModBlock
 		return TableTileEntity.class;
 	}
 	
-	public static int getIndexClicked(Vec3d clickPos)
+	public static int getIndexClicked(double x, double y)
 	{
-		Auramagic.LOG.info("CLICKED " + clickPos.toString()); // TODO: Remove
-		return 0; // TODO: Do smth
+		int slotX = (int) (x / 0.33333);
+		int slotY = (int) (y / 0.33333);
+		
+		return slotX + slotY * 3;
 	}
 }
+
+
+
+
+

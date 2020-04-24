@@ -7,9 +7,7 @@ import mod.unclecat.uc_auramagic.content.tile_entities.TileEntityListInventory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.Quaternion;
-import net.minecraft.client.renderer.model.IBakedModel;
 import net.minecraft.client.renderer.model.ItemCameraTransforms.TransformType;
-import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.tileentity.TileEntityType;
@@ -43,13 +41,33 @@ public class TableTileEntity extends TileEntityListInventory
 		public void func_225616_a_(TableTileEntity te, float f, MatrixStack matrix,
 				IRenderTypeBuffer buf, int i, int i2)
 		{
+			
 			matrix.func_227860_a_();
-			matrix.func_227861_a_(0.1, 1, 0.1);
-			matrix.func_227862_a_(0.4f, 0.4f, 0.4f);
+			matrix.func_227861_a_(0.1625, 1.012, 0.1625);
 			matrix.func_227863_a_(new Quaternion(90.0f, 0.0f, 0.0f, true));
-			//IBakedModel model = Minecraft.getInstance().getItemRenderer().getItemModelWithOverrides(te.getStackInSlot(0), te.world, null);
-         Minecraft.getInstance().getItemRenderer().func_229110_a_(te.getStackInSlot(0), TransformType.FIXED, i2, OverlayTexture.field_229196_a_, matrix, buf);
-         //Minecraft.getInstance().getItemRenderer().func_229111_a_(te.getStackInSlot(0), TransformType.FIXED, false, matrix, buf, i2, OverlayTexture.field_229196_a_, model);
+			matrix.func_227862_a_(0.32f, 0.32f, 0.32f);
+			
+			// TODO: Make it check if model 3D in GUI and move it up a bit if so
+         Minecraft.getInstance().getItemRenderer().func_229110_a_(te.getStackInSlot(0), TransformType.FIXED, i, i2, matrix, buf);
+         matrix.func_227861_a_(1.05, 0, 0);
+         Minecraft.getInstance().getItemRenderer().func_229110_a_(te.getStackInSlot(1), TransformType.FIXED, i, i2, matrix, buf);
+         matrix.func_227861_a_(1.05, 0, 0);
+         Minecraft.getInstance().getItemRenderer().func_229110_a_(te.getStackInSlot(2), TransformType.FIXED, i, i2, matrix, buf);
+         
+         matrix.func_227861_a_(-2.1, 1.05, 0);
+         Minecraft.getInstance().getItemRenderer().func_229110_a_(te.getStackInSlot(3), TransformType.FIXED, i, i2, matrix, buf);
+         matrix.func_227861_a_(1.05, 0, 0);
+         Minecraft.getInstance().getItemRenderer().func_229110_a_(te.getStackInSlot(4), TransformType.FIXED, i, i2, matrix, buf);
+         matrix.func_227861_a_(1.05, 0, 0);
+         Minecraft.getInstance().getItemRenderer().func_229110_a_(te.getStackInSlot(5), TransformType.FIXED, i, i2, matrix, buf);
+         
+         matrix.func_227861_a_(-2.1, 1.05, 0);
+         Minecraft.getInstance().getItemRenderer().func_229110_a_(te.getStackInSlot(6), TransformType.FIXED, i, i2, matrix, buf);
+         matrix.func_227861_a_(1.05, 0, 0);
+         Minecraft.getInstance().getItemRenderer().func_229110_a_(te.getStackInSlot(7), TransformType.FIXED, i, i2, matrix, buf);
+         matrix.func_227861_a_(1.05, 0, 0);
+         Minecraft.getInstance().getItemRenderer().func_229110_a_(te.getStackInSlot(8), TransformType.FIXED, i, i2, matrix, buf);
+         
          matrix.func_227865_b_();
 		}
 	}
