@@ -11,8 +11,12 @@ import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorldReader;
+import net.minecraft.world.storage.loot.LootTable;
+import net.minecraft.world.storage.loot.LootTableManager;
+import net.minecraft.world.storage.loot.LootTables;
 import net.minecraft.world.storage.loot.LootContext.Builder;
 import net.minecraftforge.common.ToolType;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class CommonNoSmeltOre extends ModBlock
 {

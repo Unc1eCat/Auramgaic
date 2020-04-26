@@ -1,0 +1,9 @@
+{
+	"parent": "uc_auramagic:block/i_table",
+	
+	"textures": {
+        "other": "uc_auramagic:block/wooden_table_other",
+        "top": "uc_auramagic:block/wooden_table_top",
+        "bottom": "uc_auramagic:block/wooden_table_bottom"
+    }
+}

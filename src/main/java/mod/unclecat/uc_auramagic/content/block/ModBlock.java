@@ -1,6 +1,8 @@
 package mod.unclecat.uc_auramagic.content.block;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.Nullable;
@@ -8,19 +10,24 @@ import javax.annotation.Nullable;
 import mod.unclecat.uc_auramagic.Auramagic;
 import mod.unclecat.uc_auramagic.content.Content;
 import mod.unclecat.uc_auramagic.content.tile_entities.ModTileEntity;
+import mod.unclecat.uc_auramagic.datagen.providers.ModLootTableProvider.IGeneratedLootTableProvider;
 import mod.unclecat.uc_auramagic.util.helpers.BlockHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
 import net.minecraft.state.IProperty;
 import net.minecraft.state.StateContainer.Builder;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.storage.loot.LootContext;
+import net.minecraft.world.storage.loot.LootParameters;
+import net.minecraft.world.storage.loot.LootTable;
 
-public class ModBlock extends Block
+public class ModBlock extends Block implements IGeneratedLootTableProvider
 {
 	public List<IProperty<?>> externalProperties = new ArrayList<IProperty<?>>();
 	
@@ -81,5 +88,17 @@ public class ModBlock extends Block
 	public boolean hasTileEntity(BlockState state)
 	{
 		return getTileEntityClass() != null;
+	}
+
+	@Override
+	public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder)
+	{
+		return Arrays.asList(new ItemStack(Item.getItemFromBlock(this))); // Frick loot tables. Loot tables suck. Only hardcoded stuff. Yey deprecated featuresssssssssssssssss
+	}
+	
+	@Override
+	public List<LootTable> generateLootTables()
+	{
+		return Collections.emptyList(); //Arrays.asList(LootTableHelper.createStandardTableFromBlock(getRegistryName().toString(), this));
 	}
 }

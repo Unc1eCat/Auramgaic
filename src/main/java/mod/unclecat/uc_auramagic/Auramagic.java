@@ -5,15 +5,16 @@ import java.util.Random;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import mod.unclecat.uc_auramagic.content.ColorHandler;
 import mod.unclecat.uc_auramagic.content.experience_gem.GemsRecivedByEvents;
 import mod.unclecat.uc_auramagic.util.helpers.RegistryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.IItemProvider;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
@@ -25,6 +26,7 @@ public class Auramagic
 	public static Logger LOG = LogManager.getLogger(MODID);
 	public static Auramagic INSTANCE = new Auramagic();
 	public static Random RANDOM = new Random();
+	public static Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
 	
 	
 	public Auramagic()

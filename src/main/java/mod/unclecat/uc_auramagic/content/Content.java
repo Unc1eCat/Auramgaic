@@ -19,7 +19,6 @@ import mod.unclecat.uc_auramagic.content.item.content.ItemExperienceShard;
 import mod.unclecat.uc_auramagic.content.recipies.content.RecipeExperienceBlock;
 import mod.unclecat.uc_auramagic.content.recipies.content.RecipeExperienceShard;
 import mod.unclecat.uc_auramagic.content.tile_entities.ModTileEntity;
-import mod.unclecat.uc_auramagic.content.tile_entities.content.TableTileEntity;
 import mod.unclecat.uc_auramagic.util.helpers.RegistryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -28,6 +27,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.SpecialRecipeSerializer;
 import net.minecraft.tileentity.TileEntityType;
+import net.minecraftforge.common.ToolType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -71,8 +71,8 @@ public class Content
 	public static CommonNoSmeltOre AMETHYST_ORE = new CommonNoSmeltOre("amethyst_ore", 3.0F, 2, new ItemStack(AMETHYST, 1), 3, 3);
 	
 	// Etc.
-	public static BlockTable WOODEN_TABLE = new BlockTable("wooden_table", Block.Properties.from(Blocks.OAK_PLANKS));
-	public static BlockTable STONE_TABLE = new BlockTable("stone_table", Block.Properties.from(Blocks.STONE));
+	public static BlockTable WOODEN_TABLE = new BlockTable("wooden_table", Block.Properties.from(Blocks.OAK_PLANKS).harvestTool(ToolType.AXE).harvestLevel(1));
+	public static BlockTable STONE_TABLE = new BlockTable("stone_table", Block.Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE).harvestLevel(1));
 	
 	
 	

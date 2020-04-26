@@ -1,0 +1,27 @@
+{
+	"type": "minecraft:crafting_shaped",
+	
+	"pattern":
+	[
+		"HHH",
+		"W W"
+	],
+	
+	"key":
+	{
+		"W": 
+		{
+			"tag": "forge:stone"	
+		},
+		"H": 
+		{
+			"tag": "uc_auramagic:stone_slabs"	
+		}
+	},
+	
+	"result":
+	{
+		"item": "uc_auramagic:stone_table",
+		"count": 2
+	}
+}

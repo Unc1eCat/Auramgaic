@@ -1,0 +1,27 @@
+{
+	"type": "minecraft:crafting_shaped",
+	
+	"pattern":
+	[
+		"HHH",
+		"W W"
+	],
+	
+	"key":
+	{
+		"W": 
+		{
+			"tag": "minecraft:planks"	
+		},
+		"H": 
+		{
+			"tag": "minecraft:wooden_slabs"	
+		}
+	},
+	
+	"result":
+	{
+		"item": "uc_auramagic:wooden_table",
+		"count": 2
+	}
+}

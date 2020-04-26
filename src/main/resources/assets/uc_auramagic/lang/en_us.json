@@ -26,5 +26,8 @@
 	"block.uc_auramagic.experience_block_earth": "Terra experience block",
 	"block.uc_auramagic.experience_block_aqua": "Aqua experience block",
 	
+	"block.uc_auramagic.wooden_table": "Wooden table",
+	"block.uc_auramagic.stone_table": "Stone table",
+	
 	"itemGroupAuramagic.name": "Auramagic"
 }
