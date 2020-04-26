@@ -60,6 +60,10 @@ public class Content
 	public static ModItem AMBER = new ModItem("amber", new Item.Properties());
 	public static ModItem AMETHYST = new ModItem("amethyst", new Item.Properties());
 	
+	// Instruments
+	public static ModItem HAMMER = new ModItem("hammer", new Item.Properties().maxStackSize(1).maxDamage(60));
+	public static ModItem WRENCH = new ModItem("wrench", new Item.Properties().maxStackSize(1).maxDamage(42));
+	public static ModItem SCREW_DRIVER = new ModItem("screw_driver", new Item.Properties().maxStackSize(1).maxDamage(34));
 	
 	
 	/***** BLOCKS ******/
