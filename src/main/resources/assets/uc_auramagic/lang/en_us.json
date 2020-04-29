@@ -15,6 +15,13 @@
 	"item.uc_auramagic.amethyst": "Amethyst",
 	"item.uc_auramagic.amber": "Amber",
 	
+	"item.uc_auramagic.wrench": "Wrench",
+	"item.uc_auramagic.hammer": "Hammer",
+	"item.uc_auramagic.screw_driver": "Screw driver",
+	
+	"item.uc_auramagic.metal_plate": "Metal plate",
+	"item.uc_auramagic.metal_stick": "Metal stick",
+	
 	"block.uc_auramagic.ruby_ore": "Ruby ore",
 	"block.uc_auramagic.topaz_ore": "Topaz ore",
 	"block.uc_auramagic.sapphire_ore": "Sapphire ore",

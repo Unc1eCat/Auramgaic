@@ -1,0 +1,28 @@
+{
+	"type": "minecraft:crafting_shaped",
+	
+	"pattern":
+	[
+		" SS",
+		"SI ",
+		" I "
+	],
+	
+	"key":
+	{
+		"S": 
+		{
+			"tag": "forge:stone"	
+		},
+		"I": 
+		{
+			"item": "minecraft:stick"	
+		}
+	},
+	
+	"result":
+	{
+		"item": "uc_auramagic:hammer",
+		"count": 1
+	}
+}

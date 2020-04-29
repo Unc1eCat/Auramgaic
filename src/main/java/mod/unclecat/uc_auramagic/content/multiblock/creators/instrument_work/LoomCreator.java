@@ -5,7 +5,7 @@ import mod.unclecat.uc_auramagic.content.Content;
 import mod.unclecat.uc_auramagic.content.multiblock.IMultiblockCreationTrigger;
 import mod.unclecat.uc_auramagic.content.multiblock.IMultiblockCreator;
 
-public class InfusionTableCreator implements IMultiblockCreator
+public class LoomCreator implements IMultiblockCreator
 {	
 	@Override
 	public boolean matches(IMultiblockCreationTrigger trigger)
@@ -13,12 +13,12 @@ public class InfusionTableCreator implements IMultiblockCreator
 		InstrumentWorkMultiblockCreationTrigger t = ((InstrumentWorkMultiblockCreationTrigger)trigger);
 		
 		if (t.clickedState.getBlock() != Content.WOODEN_TABLE) return false;
-		return t.matchesClickedSequenceByItem(null); // TODO: Create instruments
+		return t.matchesClickedSequenceByItem(Content.HAMMER, Content.HAMMER, Content.HAMMER); // TODO: Create instruments
 	}
-
+	
 	@Override
 	public void create(IMultiblockCreationTrigger trigger)
 	{
-		// TODO Create infusion table
+		// TODO Create loom
 	}
 }

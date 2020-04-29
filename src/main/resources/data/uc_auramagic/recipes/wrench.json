@@ -1,0 +1,28 @@
+{
+	"type": "minecraft:crafting_shaped",
+	
+	"pattern":
+	[
+		"I I",
+		" # ",
+		"I I"
+	],
+	
+	"key":
+	{
+		"I": 
+		{
+			"item": "uc_auramagic:metal_stick"	
+		},
+		"#": 
+		{
+			"item": "uc_auramagic:metal_plate"	
+		}
+	},
+	
+	"result":
+	{
+		"item": "uc_auramagic:wrench",
+		"count": 1
+	}
+}

@@ -16,6 +16,8 @@ import mod.unclecat.uc_auramagic.content.experience_gem.EnumExperienceColor;
 import mod.unclecat.uc_auramagic.content.item.ModItem;
 import mod.unclecat.uc_auramagic.content.item.content.ItemExperienceGem;
 import mod.unclecat.uc_auramagic.content.item.content.ItemExperienceShard;
+import mod.unclecat.uc_auramagic.content.item.content.ItemHammer;
+import mod.unclecat.uc_auramagic.content.item.content.ItemWrench;
 import mod.unclecat.uc_auramagic.content.recipies.content.RecipeExperienceBlock;
 import mod.unclecat.uc_auramagic.content.recipies.content.RecipeExperienceShard;
 import mod.unclecat.uc_auramagic.content.tile_entities.ModTileEntity;
@@ -61,10 +63,13 @@ public class Content
 	public static ModItem AMETHYST = new ModItem("amethyst", new Item.Properties());
 	
 	// Instruments
-	public static ModItem HAMMER = new ModItem("hammer", new Item.Properties().maxStackSize(1).maxDamage(60));
-	public static ModItem WRENCH = new ModItem("wrench", new Item.Properties().maxStackSize(1).maxDamage(42));
+	public static ItemHammer HAMMER = new ItemHammer();
+	public static ItemWrench WRENCH = new ItemWrench();
 	public static ModItem SCREW_DRIVER = new ModItem("screw_driver", new Item.Properties().maxStackSize(1).maxDamage(34));
 	
+	// Materials
+	public static ModItem METAL_STICK = new ModItem("metal_stick", null);
+	public static ModItem METAL_PLATE = new ModItem("metal_plate", null);
 	
 	/***** BLOCKS ******/
 	// Gem ores

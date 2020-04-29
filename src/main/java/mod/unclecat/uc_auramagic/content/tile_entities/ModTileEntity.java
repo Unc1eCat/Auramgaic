@@ -51,6 +51,7 @@ public abstract class ModTileEntity extends TileEntity
 		return new SUpdateTileEntityPacket(pos, -999, writeData(new CompoundNBT()));
 	}
 	
+	@SuppressWarnings("unchecked")
 	public static <T extends ModTileEntity, R extends TileEntityRenderer<T>> Class<R> getTERClass(Class<T> te)
 	{
 		Class<?>[] classes = te.getDeclaredClasses();

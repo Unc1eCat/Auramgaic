@@ -1,0 +1,28 @@
+{
+	"type": "minecraft:crafting_shaped",
+	
+	"pattern":
+	[
+		" I ",
+		" I ",
+		" H "
+	],
+	
+	"key":
+	{
+		"H": 
+		{
+			"item": "minecraft:orange_wool"	
+		},
+		"I": 
+		{
+			"item": "uc_auramagic:metal_stick"	
+		}
+	},
+	
+	"result":
+	{
+		"item": "uc_auramagic:screw_driver",
+		"count": 1
+	}
+}
