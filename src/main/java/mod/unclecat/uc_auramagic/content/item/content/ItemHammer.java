@@ -3,7 +3,6 @@ package mod.unclecat.uc_auramagic.content.item.content;
 import java.util.List;
 
 import mod.unclecat.uc_auramagic.content.Content;
-import mod.unclecat.uc_auramagic.content.item.ModItem;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.Item;
@@ -19,7 +18,7 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.Vec3d;
 
-public class ItemHammer extends ModItem
+public class ItemHammer extends InstrumentItem
 {
 	public ItemHammer()
 	{
@@ -29,7 +28,7 @@ public class ItemHammer extends ModItem
 	
 	
 	@Override
-	public ActionResultType onItemUse(ItemUseContext c) // TODO: Fix it and make it work
+	public ActionResultType onItemUseDecorated(ItemUseContext c)
 	{	
 		if (c.getFace() == Direction.UP && c.getWorld().getBlockState(c.getPos().up()).getBlock() == Blocks.AIR && c.getWorld().getBlockState(c.getPos()).getBlock() == Blocks.ANVIL)
 		{

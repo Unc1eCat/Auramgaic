@@ -59,9 +59,16 @@ public class MasterTileEntity extends ModTileEntity implements IMultiblockTileEn
 		
 	}
 	
+	@Override
+	public void onRemoval()
+	{
+		
+	}
+	
 	
 	public <T extends SlaveTileEntity> boolean isItsSlave(T slave)
 	{
 		return slave.getMaster() == this;
 	}
+
 }

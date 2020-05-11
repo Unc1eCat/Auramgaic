@@ -10,7 +10,6 @@ import mod.unclecat.uc_auramagic.Auramagic;
 import mod.unclecat.uc_auramagic.content.ColorHandler;
 import mod.unclecat.uc_auramagic.content.Content;
 import mod.unclecat.uc_auramagic.content.tile_entities.ModTileEntity;
-import mod.unclecat.uc_auramagic.datagen.DataGenerators;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;

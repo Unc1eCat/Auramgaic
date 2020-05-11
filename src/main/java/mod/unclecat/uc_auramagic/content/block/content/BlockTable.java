@@ -1,15 +1,22 @@
 package mod.unclecat.uc_auramagic.content.block.content;
 
+import java.util.List;
+import java.util.function.Predicate;
+
 import mod.unclecat.uc_auramagic.content.ItemGroupAurmagic;
 import mod.unclecat.uc_auramagic.content.block.ModBlock;
 import mod.unclecat.uc_auramagic.content.tile_entities.ModTileEntity;
 import mod.unclecat.uc_auramagic.content.tile_entities.content.TableTileEntity;
 import mod.unclecat.uc_auramagic.util.helpers.BlockHelper;
+import mod.unclecat.uc_auramagic.util.helpers.JavaHelper;
+import mod.unclecat.uc_auramagic.util.multiblock.HorizontalRotationlessMatcher;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
@@ -47,8 +54,6 @@ public class BlockTable extends ModBlock
 		if (rayTrace.getHitVec().y - pos.getY() < 0.999) return ActionResultType.PASS;
 		
 		int index = getIndexClicked(rayTrace.getHitVec().x - pos.getX(), rayTrace.getHitVec().z - pos.getZ());
-		
-		//if (player.getHeldItemMainhand().getItem()) { } // TODO: Make building process...
 		
 		if (te.getStackInSlot(index).isEmpty())
 		{
@@ -118,6 +123,48 @@ public class BlockTable extends ModBlock
 		int slotY = (int) (y / 0.33333);
 		
 		return slotX + slotY * 3;
+	}
+	
+	
+	public static boolean doesItemsMatchByItemShaped(World world, BlockPos pos, Direction direction, Item... requiredItems)
+	{
+		TableTileEntity te = (TableTileEntity) world.getTileEntity(pos);
+		
+		List<List<Item>> requiredItemsList = HorizontalRotationlessMatcher.rotateTwoDimListOnTopOfBlock(JavaHelper.asTwoDimList(3, requiredItems), direction);
+		
+		for (int i = 0; i < 3; i++)
+		{
+			for (int j = 0; j < 3; j++)
+			{
+				if (te.getStackInSlot(i * 3 + j).getItem() != requiredItemsList.get(i).get(j))
+				{
+					return false;
+				}
+			}
+		}
+		
+		return true;
+	}
+	public static boolean doesItemsMatchByPredicateShaped(World world, BlockPos pos, Direction direction, Predicate<ItemStack>... requiredItems)
+	{
+		TableTileEntity te = (TableTileEntity) world.getTileEntity(pos);
+		boolean ret = true;
+		
+		List<List<Predicate<ItemStack>>> requiredItemsList = HorizontalRotationlessMatcher.rotateTwoDimListOnTopOfBlock(JavaHelper.asTwoDimList(3, requiredItems), direction);
+		
+		for (int i = 0; i < 3; i++)
+		{
+			for (int j = 0; j < 3; j++)
+			{
+				if (!requiredItemsList.get(i).get(j).test(te.getStackInSlot(i * 3 + j)))
+				{
+					ret = false;
+					break;
+				}
+			}
+		}
+		
+		return ret;
 	}
 }
 

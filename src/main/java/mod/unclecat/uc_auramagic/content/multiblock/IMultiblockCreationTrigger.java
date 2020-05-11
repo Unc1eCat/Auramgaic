@@ -5,5 +5,8 @@ package mod.unclecat.uc_auramagic.content.multiblock;
  */
 public interface IMultiblockCreationTrigger
 {
-	
+	default public void setNoMatches(boolean val)
+	{
+		
+	}
 }

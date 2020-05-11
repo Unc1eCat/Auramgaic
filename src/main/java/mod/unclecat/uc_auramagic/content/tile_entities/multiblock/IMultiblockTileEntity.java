@@ -7,4 +7,6 @@ public interface IMultiblockTileEntity
 	public void onDestroyed();
 	
 	public void onNeighbourChanged(BlockPos fromPos);
+	
+	public void onRemoval();
 }

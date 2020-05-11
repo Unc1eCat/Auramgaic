@@ -53,6 +53,12 @@ public class SlaveTileEntity extends ModTileEntity implements IMultiblockTileEnt
 		getMaster().onSlavesNeighbourChanged(this);
 	}
 	
+	@Override
+	public void onRemoval()
+	{
+		
+	}
+	
 	
 	@SuppressWarnings("unchecked")
 	public <T extends MasterTileEntity> T getMaster()
@@ -69,4 +75,5 @@ public class SlaveTileEntity extends ModTileEntity implements IMultiblockTileEnt
 	{
 		return master == getMaster();
 	}
+
 }

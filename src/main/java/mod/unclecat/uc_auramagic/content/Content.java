@@ -12,18 +12,25 @@ import mod.unclecat.uc_auramagic.content.block.ModBlock;
 import mod.unclecat.uc_auramagic.content.block.content.BlockExperienceBlock;
 import mod.unclecat.uc_auramagic.content.block.content.BlockTable;
 import mod.unclecat.uc_auramagic.content.block.content.CommonNoSmeltOre;
+import mod.unclecat.uc_auramagic.content.block.content.UnderInstrumentsConstructionBlock;
 import mod.unclecat.uc_auramagic.content.experience_gem.EnumExperienceColor;
 import mod.unclecat.uc_auramagic.content.item.ModItem;
+import mod.unclecat.uc_auramagic.content.item.content.InstrumentItem;
 import mod.unclecat.uc_auramagic.content.item.content.ItemExperienceGem;
 import mod.unclecat.uc_auramagic.content.item.content.ItemExperienceShard;
 import mod.unclecat.uc_auramagic.content.item.content.ItemHammer;
 import mod.unclecat.uc_auramagic.content.item.content.ItemWrench;
+import mod.unclecat.uc_auramagic.content.multiblock.Multiblocks;
+import mod.unclecat.uc_auramagic.content.multiblock.creators.instrument_work.InstrumentWorkMultiblockCreationTrigger;
+import mod.unclecat.uc_auramagic.content.multiblock.creators.instrument_work.LoomCreator;
 import mod.unclecat.uc_auramagic.content.recipies.content.RecipeExperienceBlock;
 import mod.unclecat.uc_auramagic.content.recipies.content.RecipeExperienceShard;
 import mod.unclecat.uc_auramagic.content.tile_entities.ModTileEntity;
 import mod.unclecat.uc_auramagic.util.helpers.RegistryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.material.MaterialColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
@@ -39,6 +46,12 @@ public class Content
 {
 	public static List<Object> additionalGameObjects = new ArrayList<Object>();
 	
+	static
+	{
+		/***** MULTIBLOCKS *****/
+		Multiblocks.put(InstrumentWorkMultiblockCreationTrigger.class, new LoomCreator());
+	}
+		
 	
 	/***** ITEMS ******/
 	// Colored experience items
@@ -65,7 +78,7 @@ public class Content
 	// Instruments
 	public static ItemHammer HAMMER = new ItemHammer();
 	public static ItemWrench WRENCH = new ItemWrench();
-	public static ModItem SCREW_DRIVER = new ModItem("screw_driver", new Item.Properties().maxStackSize(1).maxDamage(34));
+	public static InstrumentItem SCREW_DRIVER = new InstrumentItem("screw_driver", new Item.Properties().maxStackSize(1).maxDamage(34));
 	
 	// Materials
 	public static ModItem METAL_STICK = new ModItem("metal_stick", null);
@@ -82,7 +95,10 @@ public class Content
 	// Etc.
 	public static BlockTable WOODEN_TABLE = new BlockTable("wooden_table", Block.Properties.from(Blocks.OAK_PLANKS).harvestTool(ToolType.AXE).harvestLevel(1));
 	public static BlockTable STONE_TABLE = new BlockTable("stone_table", Block.Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE).harvestLevel(1));
-	
+	public static UnderInstrumentsConstructionBlock WOODEN_UNDER_INSTRUMENTS_CONSTRUCTION_BLOCK = new UnderInstrumentsConstructionBlock("wooden_under_instruments_construction_block", Block.Properties.from(Blocks.OAK_PLANKS).hardnessAndResistance(3.0f));
+	public static UnderInstrumentsConstructionBlock STONE_UNDER_INSTRUMENTS_CONSTRUCTION_BLOCK = new UnderInstrumentsConstructionBlock("stone_under_instruments_construction_block", Block.Properties.from(Blocks.STONE).hardnessAndResistance(3.0f));
+	public static UnderInstrumentsConstructionBlock METAL_UNDER_INSTRUMENTS_CONSTRUCTION_BLOCK = new UnderInstrumentsConstructionBlock("metal_under_instruments_construction_block", Block.Properties.from(Blocks.IRON_BLOCK).hardnessAndResistance(3.0f));
+	public static UnderInstrumentsConstructionBlock MAGIC_UNDER_INSTRUMENTS_CONSTRUCTION_BLOCK = new UnderInstrumentsConstructionBlock("magic_under_instruments_construction_block", Block.Properties.from(Blocks.GLOWSTONE).hardnessAndResistance(3.0f));
 	
 	
 	/***** RECIPIES *****/
@@ -91,6 +107,9 @@ public class Content
 	public static SpecialRecipeSerializer<RecipeExperienceBlock> RECIPE_EXPERIENCE_BLOCK = 
 			IRecipeSerializer.register(Auramagic.prefix("experience_block"), new SpecialRecipeSerializer<RecipeExperienceBlock>(RecipeExperienceBlock::new));
 	
+	
+	/***** MATERIALS ******/
+	public static final Material MATERIAL_MAGIC = (new Material.Builder(MaterialColor.AIR)).build();
 	
 	@SubscribeEvent
 	public static void registerItems(RegistryEvent.Register<Item> event)
