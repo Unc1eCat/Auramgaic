@@ -1,7 +1,12 @@
 package mod.unclecat.uc_auramagic;
 
+import java.util.Collection;
 import java.util.Random;
 
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.RecipeManager;
+import net.minecraft.world.dimension.DimensionType;
+import net.minecraftforge.fml.event.server.FMLServerStartedEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -31,7 +36,7 @@ public class Auramagic
 	
 	public Auramagic()
 	{
-		LOG.info("Aurmaagic instance has been created!");
+		LOG.info("Auramagic instance has been created!");
 		
 		MinecraftForge.EVENT_BUS.addListener(Auramagic::setupCommon);	
 		MinecraftForge.EVENT_BUS.addListener(Auramagic::setupClient);
@@ -51,6 +56,7 @@ public class Auramagic
 	
 	public static void setupCommon(FMLServerStartingEvent event)
 	{
+		RegistryHelper.registerAllRecipesViaEvent(event);
 	}
 	
 	public static void setupClient(FMLClientSetupEvent event)

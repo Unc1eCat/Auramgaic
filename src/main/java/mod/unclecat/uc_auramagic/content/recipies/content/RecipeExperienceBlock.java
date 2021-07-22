@@ -59,6 +59,6 @@ public class RecipeExperienceBlock extends SpecialRecipe
 	@Override
 	public IRecipeSerializer<?> getSerializer()
 	{
-		return Content.RECIPE_EXPERIENCE_BLOCK;
+		return null;
 	}
 }

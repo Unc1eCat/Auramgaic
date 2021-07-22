@@ -54,6 +54,6 @@ public class RecipeExperienceShard extends SpecialRecipe
 	@Override
 	public IRecipeSerializer<?> getSerializer()
 	{
-		return Content.RECIPE_EXPERIENCE_SHARD;
+		return null;
 	}
 }
