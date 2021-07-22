@@ -8,6 +8,8 @@ import java.util.function.Function;
 import mod.unclecat.uc_auramagic.Auramagic;
 import mod.unclecat.uc_auramagic.content.ColorHandler;
 import mod.unclecat.uc_auramagic.content.Content;
+import mod.unclecat.uc_auramagic.content.multiblock.IMultiblockCreator;
+import mod.unclecat.uc_auramagic.content.multiblock.Multiblocks;
 import mod.unclecat.uc_auramagic.content.tile_entities.ModTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
@@ -213,14 +215,17 @@ public class RegistryHelper {
         return ret;
     }
 
-    public static void registerAllRecipesViaEvent(ServerLifecycleEvent event)
-    {
+    public static void registerAllRecipesViaEvent(ServerLifecycleEvent event) {
         RecipeManager rm = event.getServer().getRecipeManager();
         Collection<IRecipe<?>> recipes = rm.getRecipes();
         Collection<IRecipe<?>> myRecipes = RegistryHelper.getHardcodedRecipes();
 
         recipes.addAll(myRecipes);
         rm.func_223389_a(recipes);
+    }
+
+    public static void registerAllMultiblockCreators() {
+        getAllInstancesOf(IMultiblockCreator.class).forEach(i -> Multiblocks.add(i));
     }
 }
  

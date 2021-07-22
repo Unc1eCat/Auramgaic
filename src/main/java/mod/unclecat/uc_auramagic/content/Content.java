@@ -43,12 +43,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class Content {
     public static List<Object> additionalGameObjects = new ArrayList<Object>();
 
-    static {
-        /***** MULTIBLOCKS *****/
-        Multiblocks.put(InstrumentWorkMultiblockCreationTrigger.class, new LoomCreator());
-    }
-
-
     /***** ITEMS ******/
     // Colored experience items
     public static ItemExperienceGem EXPERIENCE_GEM_FIRE = new ItemExperienceGem(EnumExperienceColor.FIRE);
@@ -98,16 +92,15 @@ public class Content {
 
 
     /***** RECIPIES *****/
-//    public static SpecialRecipeSerializer<RecipeExperienceShard> RECIPE_EXPERIENCE_SHARD =
-//            IRecipeSerializer.register(Auramagic.prefix("experience_shard"), new SpecialRecipeSerializer<RecipeExperienceShard>(RecipeExperienceShard::new));
-//    public static SpecialRecipeSerializer<RecipeExperienceBlock> RECIPE_EXPERIENCE_BLOCK =
-//            IRecipeSerializer.register(Auramagic.prefix("experience_block"), new SpecialRecipeSerializer<RecipeExperienceBlock>(RecipeExperienceBlock::new));
     public static RecipeExperienceBlock RECIPE_EXPERIENCE_BLOCK = new RecipeExperienceBlock(new ResourceLocation(Auramagic.prefix("experience_block")));
-    public static RecipeExperienceBlock RECIPE_EXPERIENCE_SHARD = new RecipeExperienceBlock(new ResourceLocation(Auramagic.prefix("experience_shard")));
+    public static RecipeExperienceShard RECIPE_EXPERIENCE_SHARD = new RecipeExperienceShard(new ResourceLocation(Auramagic.prefix("experience_shard")));
 
 
     /***** MATERIALS ******/
     public static final Material MATERIAL_MAGIC = (new Material.Builder(MaterialColor.AIR)).build();
+
+    /***** MULTIBLOCK CREATORS *****/
+    public static LoomCreator LOOM_CREATOR = new LoomCreator();
 
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
@@ -151,16 +144,5 @@ public class Content {
         for (Entry<Class<? extends ModTileEntity>, List<Block>> i : set) {
             RegistryHelper.registerTileEntityTypeFromMapEntry(i, event.getRegistry());
         }
-    }
-
-    @SubscribeEvent
-    public void registerHardcodedRecipes(FMLServerStartingEvent event) {
-        RecipeManager rm = event.getServer().getRecipeManager();
-        Collection<IRecipe<?>> recipes = rm.getRecipes();
-        System.out.println(RegistryHelper.getHardcodedRecipes().size());
-        System.out.println(RegistryHelper.getHardcodedRecipes());
-
-        recipes.addAll(RegistryHelper.getHardcodedRecipes());
-        rm.func_223389_a(recipes);
     }
 }

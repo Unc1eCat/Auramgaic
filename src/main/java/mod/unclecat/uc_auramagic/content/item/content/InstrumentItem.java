@@ -83,10 +83,12 @@ public class InstrumentItem extends ModItem
 				
 				if (trig.wrong) // Execute whatever this item should do not creating multiblock
 				{
+					System.out.println("hhhhhhh");
 					return onItemUseDecorated(c);
 				}
 				else // Start building multiblock
 				{
+					System.out.println("fffffff");
 					world.setBlockState(pos, UnderInstrumentsConstructionBlock.fromMaterial(world.getBlockState(pos).getMaterial()).getDefaultState());
 					if (!world.isRemote) ((UnderInstrumentsConstructionTileEntity)world.getTileEntity(pos)).clickedInstrumentsSequence.add((InstrumentItem) c.getPlayer().getHeldItem(c.getHand()).getItem());	
 					if (!world.isRemote) trig.clickedInstrumentsSquence = ((UnderInstrumentsConstructionTileEntity)te).clickedInstrumentsSequence;	

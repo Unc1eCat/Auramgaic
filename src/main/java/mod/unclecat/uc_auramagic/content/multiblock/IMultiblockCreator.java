@@ -5,12 +5,6 @@ package mod.unclecat.uc_auramagic.content.multiblock;
  */
 public interface IMultiblockCreator
 {
-	public boolean matches(IMultiblockCreationTrigger trigger);
-	
-	public void create(IMultiblockCreationTrigger trigger);
-	
-	default public float getPriority()
-	{
-		return 0;
-	}
+	/// Return true if the trigger matched the creator in any way
+	public boolean handleCreationTrigger(IMultiblockCreationTrigger trigger);
 }

@@ -15,9 +15,9 @@ import net.minecraftforge.fml.network.simple.SimpleChannel;
 
 public class ModNetwork
 {
-	public static String PROTIOCOL_VERSION = "1";
+	public static String PROTOCOL_VERSION = "1";
 	public static SimpleChannel CHANNEL = 
-			NetworkRegistry.newSimpleChannel(new ResourceLocation(Auramagic.prefix("main")), () -> PROTIOCOL_VERSION, PROTIOCOL_VERSION::equals, PROTIOCOL_VERSION::equals);
+			NetworkRegistry.newSimpleChannel(new ResourceLocation(Auramagic.prefix("main")), () -> PROTOCOL_VERSION, PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);
 	private static int currentMessageRegisteringID = 0;	
 	
 	public static <T extends IMessage> void registerMessage(Class<T> messageClass) 
@@ -46,7 +46,7 @@ public class ModNetwork
 								catch (InstantiationException | IllegalAccessException | IllegalArgumentException
 										| InvocationTargetException e)
 								{
-									Auramagic.LOG.error("Failed to instantinate network message with constructor " + reader.toString());
+									Auramagic.LOG.error("Failed to instantiate network message with constructor " + reader.toString());
 									e.printStackTrace();
 									return null;
 								}

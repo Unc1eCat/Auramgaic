@@ -1,5 +1,6 @@
 package mod.unclecat.uc_auramagic.content.multiblock;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -7,71 +8,42 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 
 import mod.unclecat.uc_auramagic.Auramagic;
-import mod.unclecat.uc_auramagic.content.multiblock.creators.instrument_work.InstrumentWorkMultiblockCreationTrigger;
-import mod.unclecat.uc_auramagic.content.multiblock.creators.instrument_work.LoomCreator;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class Multiblocks
 {
-	protected static Multimap<Class<? extends IMultiblockCreationTrigger>, IMultiblockCreator> creators = ArrayListMultimap.create();
-	protected static boolean isAvaiable = true;
+	protected static List<IMultiblockCreator> creators = new ArrayList();
+	static boolean isAvailable = true;
 	
 	
-	public static void put(Class<? extends IMultiblockCreationTrigger> trigger, IMultiblockCreator value) // TODO: Make it return the value parameter if it was successfully put
+	public static void add(IMultiblockCreator value)
 	{
-		if (isAvaiable)
+		if (isAvailable)
 		{
-			float putPriority = value.getPriority();
-			float previousPriority = 0.0f;
-			List<IMultiblockCreator> list = (List<IMultiblockCreator>) creators.get(trigger);
-			
-			for (int i = 0; i < list.size(); i++)
-			{
-				float currentPriority = list.get(i).getPriority();
-				
-				if (previousPriority <= putPriority && putPriority <= currentPriority)
-				{
-					list.add(i, value);
-					creators.replaceValues(trigger, list);
-					break;
-				}
-				
-				previousPriority = currentPriority;
-			}
-			
-			if (list.size() == 0)
-			{
-				creators.put(trigger, value);
-			}
-			
+			creators.add(value);
 		}
 		else
 		{			
-			Auramagic.LOG.error("Attempted to put multiblock creator {} in an unavaiable multiblock creators registry. The creator will not be put in the registry.", value.getClass().getSimpleName());
+			Auramagic.LOG.error("Attempted to put multiblock creator {} in an unavailable multiblock creators registry. The creator will not be put in the registry.", value.getClass().getSimpleName());
 		}
 	}
 	
-	public static Collection<IMultiblockCreator> get(Class<? extends IMultiblockCreationTrigger> key)
+	protected static boolean isAvailable()
 	{
-		return creators.get(key);
+		return isAvailable;
 	}
 	
-	protected static boolean isAvaiable()
+	public static <T extends IMultiblockCreationTrigger> T triggerCreation(T creationTrigger)
 	{
-		return isAvaiable;
-	}
-	
-	public static <T extends IMultiblockCreationTrigger> T triggerCreation(T triggerBody)
-	{
-		for (IMultiblockCreator i : creators.get(triggerBody.getClass()))
+		for (IMultiblockCreator i : creators)
 		{
-			if (i.matches(triggerBody))
+			if (i.handleCreationTrigger(creationTrigger))
 			{
-				triggerBody.setNoMatches(false);
-				i.create(triggerBody);
 				break;
 			}
 		}
 		
-		return triggerBody;
+		return creationTrigger;
 	}
 }

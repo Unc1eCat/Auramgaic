@@ -22,7 +22,6 @@ public class InstrumentWorkMultiblockCreationTrigger implements IMultiblockCreat
 	
 	// Returned
 	public boolean wrong = true;
-	public UnderInstrumentsConstructionBlock turnBlockIntoBlock;
 	
 	
 	@Override
@@ -47,7 +46,7 @@ public class InstrumentWorkMultiblockCreationTrigger implements IMultiblockCreat
 		return true;
 	}
 	
-	public boolean equalsCllickedSequenceByItem(InstrumentItem... requiredSequence)
+	public boolean equalsClickedSequenceByItem(InstrumentItem... requiredSequence)
 	{
 		if (requiredSequence.length != clickedInstrumentsSquence.size()) return false;
 		
