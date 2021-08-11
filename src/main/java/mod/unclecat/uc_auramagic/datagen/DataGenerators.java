@@ -1,7 +1,8 @@
 package mod.unclecat.uc_auramagic.datagen;
 
 import mod.unclecat.uc_auramagic.Auramagic;
-import mod.unclecat.uc_auramagic.datagen.providers.BlockDropLootTableProvider;
+import mod.unclecat.uc_auramagic.datagen.providers.ItemModelsProvider;
+import mod.unclecat.uc_auramagic.datagen.providers.LootTableProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -17,6 +18,7 @@ public class DataGenerators
 	public static void gatherData(GatherDataEvent event)
 	{
 		generator = event.getGenerator();
-		generator.addProvider(new BlockDropLootTableProvider());
+		generator.addProvider(new LootTableProvider());
+		generator.addProvider(new ItemModelsProvider(generator, Auramagic.MODID, event.getExistingFileHelper()));
 	}
 }

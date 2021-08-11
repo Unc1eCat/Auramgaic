@@ -1,7 +1,9 @@
 package mod.unclecat.uc_auramagic.content.block.content;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import mod.unclecat.uc_auramagic.content.ItemGroupAurmagic;
 import mod.unclecat.uc_auramagic.content.block.ModBlock;
@@ -9,6 +11,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.storage.loot.LootTable;
@@ -46,5 +49,10 @@ public class CommonNoSmeltOre extends ModBlock
 	public int getExpDrop(BlockState state, IWorldReader world, BlockPos pos, int fortune, int silktouch)
 	{
 		return silktouch == 0 ? dropExp : 0;
+	}
+
+	@Override
+	public Map<ResourceLocation, LootTable> generateLootTables() {
+		return new HashMap<>();
 	}
 }

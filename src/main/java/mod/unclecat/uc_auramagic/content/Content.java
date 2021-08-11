@@ -73,6 +73,10 @@ public class Content {
     // Materials
     public static ModItem METAL_STICK = new ModItem("metal_stick", null);
     public static ModItem METAL_PLATE = new ModItem("metal_plate", null);
+    public static ModItem AURA_FILAMENT = new ModItem("aura_filament", null);
+    public static ModItem AURA_TISSUE = new ModItem("aura_tissue", null);
+    public static ModItem CLOTH = new ModItem("cloth", null);
+
 
     /***** BLOCKS ******/
     // Gem ores

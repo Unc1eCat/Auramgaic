@@ -131,7 +131,9 @@ public class BlockTable extends ModBlock
 		TableTileEntity te = (TableTileEntity) world.getTileEntity(pos);
 		
 		List<List<Item>> requiredItemsList = HorizontalRotationlessMatcher.rotateTwoDimListOnTopOfBlock(JavaHelper.asTwoDimList(3, requiredItems), direction);
-		
+
+		System.out.println(requiredItemsList.toString());
+
 		for (int i = 0; i < 3; i++)
 		{
 			for (int j = 0; j < 3; j++)

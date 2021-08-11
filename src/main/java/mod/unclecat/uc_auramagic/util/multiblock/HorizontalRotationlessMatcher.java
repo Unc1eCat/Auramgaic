@@ -27,7 +27,7 @@ public class HorizontalRotationlessMatcher extends HorizontalRotationlessPositio
 
     public HorizontalRotationlessMatcher(HorizontalRotationlessMatcher copyFrom) {
         super(copyFrom);
-        world = copyFrom.world;
+        world = copyFrom.getWorld();
         northMatches = copyFrom.northMatches;
         southMatches = copyFrom.southMatches;
         westMatches = copyFrom.westMatches;
@@ -91,10 +91,10 @@ public class HorizontalRotationlessMatcher extends HorizontalRotationlessPositio
 
 
     public HorizontalRotationlessMatcher matchBlock(Block block) {
-        if (northMatches) northMatches = world.getBlockState(currentPosNorth).getBlock() == block;
-        if (southMatches) southMatches = world.getBlockState(currentPosSouth).getBlock() == block;
-        if (eastMatches) eastMatches = world.getBlockState(currentPosEast).getBlock() == block;
-        if (westMatches) westMatches = world.getBlockState(currentPosWest).getBlock() == block;
+        if (northMatches) northMatches = getWorld().getBlockState(currentPosNorth).getBlock() == block;
+        if (southMatches) southMatches = getWorld().getBlockState(currentPosSouth).getBlock() == block;
+        if (eastMatches) eastMatches = getWorld().getBlockState(currentPosEast).getBlock() == block;
+        if (westMatches) westMatches = getWorld().getBlockState(currentPosWest).getBlock() == block;
 
         return this;
     }
@@ -103,10 +103,10 @@ public class HorizontalRotationlessMatcher extends HorizontalRotationlessPositio
         boolean n = false, s = false, w = false, e = false;
 
         for (Block i : blocks) {
-            if (!n) n = world.getBlockState(currentPosNorth).getBlock() == i;
-            if (!s) s = world.getBlockState(currentPosSouth).getBlock() == i;
-            if (!w) w = world.getBlockState(currentPosWest).getBlock() == i;
-            if (!e) e = world.getBlockState(currentPosEast).getBlock() == i;
+            if (!n) n = getWorld().getBlockState(currentPosNorth).getBlock() == i;
+            if (!s) s = getWorld().getBlockState(currentPosSouth).getBlock() == i;
+            if (!w) w = getWorld().getBlockState(currentPosWest).getBlock() == i;
+            if (!e) e = getWorld().getBlockState(currentPosEast).getBlock() == i;
         }
 
         if (northMatches) northMatches = n;
@@ -253,7 +253,7 @@ public class HorizontalRotationlessMatcher extends HorizontalRotationlessPositio
 
     @SuppressWarnings("incomplete-switch")
     public static <T> List<List<T>> rotateTwoDimListOnTopOfBlock(List<List<T>> listIn, Direction dir) {
-        switch (dir) // Yes it's awful (TODOIMPORTANT)
+        switch (dir) // Yes it's awful (TODO IMPORTANT)
         {
             case EAST:
                 return rotateTwoDimList(listIn);
@@ -268,6 +268,10 @@ public class HorizontalRotationlessMatcher extends HorizontalRotationlessPositio
                 return rotateTwoDimList(listIn);
         }
 
-        return null;
+        return listIn;
+    }
+
+    public World getWorld() {
+        return world;
     }
 }

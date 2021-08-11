@@ -8,7 +8,7 @@
 	"item.uc_auramagic.experience_shard_air": "Aerum experience shard",
 	"item.uc_auramagic.experience_shard_earth": "Terra experience shard",
 	"item.uc_auramagic.experience_shard_aqua": "Aqua experience shard",
-	
+
 	"item.uc_auramagic.ruby": "Ruby",
 	"item.uc_auramagic.topaz": "Topaz",
 	"item.uc_auramagic.sapphire": "Sapphire",
@@ -21,6 +21,9 @@
 	
 	"item.uc_auramagic.metal_plate": "Metal plate",
 	"item.uc_auramagic.metal_stick": "Metal stick",
+	"item.uc_auramagic.aura_tissue": "Aura tissue",
+	"item.uc_auramagic.aura_filament": "Aura filament",
+	"item.uc_auramagic.cloth": "Cloth",
 	
 	"block.uc_auramagic.ruby_ore": "Ruby ore",
 	"block.uc_auramagic.topaz_ore": "Topaz ore",
