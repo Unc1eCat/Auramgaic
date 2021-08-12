@@ -175,25 +175,25 @@ public class RegistryHelper {
             return;
         }
 
-//        DistExecutor.runWhenOn(Dist.CLIENT, () -> () ->
-//        {
-//            Class<Y> ter = ModTileEntity.getTERClass((Class<T>) entry.getKey());
-//
-//            if (ter != null) {
-//                ClientRegistry.bindTileEntityRenderer(type, new Function<TileEntityRendererDispatcher, Y>() {
-//                    @Override
-//                    public Y apply(TileEntityRendererDispatcher t) {
-//                        try {
-//                            return ter.getConstructor(TileEntityRendererDispatcher.class).newInstance(t);
-//                        } catch (Exception e) {
-//                            Auramagic.LOG.error("Could not create tile entity renderer.");
-//                            e.printStackTrace();
-//                            return null;
-//                        }
-//                    }
-//                });
-//            }
-//        });
+        DistExecutor.runWhenOn(Dist.CLIENT, () -> () ->
+        {
+            Class<Y> ter = ModTileEntity.getTERClass((Class <T>) entry.getKey());
+
+            if (ter != null) {
+                ClientRegistry.bindTileEntityRenderer(type, new Function<TileEntityRendererDispatcher, Y>() {
+                    @Override
+                    public Y apply(TileEntityRendererDispatcher t) {
+                        try {
+                            return ter.getConstructor(TileEntityRendererDispatcher.class).newInstance(t);
+                        } catch (Exception e) {
+                            Auramagic.LOG.error("Could not create tile entity renderer.");
+                            e.printStackTrace();
+                            return null;
+                        }
+                    }
+                });
+            }
+        });
     }
 
     public static Set<IRecipe<?>> getHardcodedRecipes() {
