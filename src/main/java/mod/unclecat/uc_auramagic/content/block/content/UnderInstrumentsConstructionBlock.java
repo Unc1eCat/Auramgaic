@@ -5,6 +5,7 @@ import mod.unclecat.uc_auramagic.content.block.ModBlock;
 import mod.unclecat.uc_auramagic.content.tile_entities.ModTileEntity;
 import mod.unclecat.uc_auramagic.content.tile_entities.content.UnderInstrumentsConstructionTileEntity;
 import mod.unclecat.uc_auramagic.util.game_objects.IKind;
+import mod.unclecat.uc_auramagic.util.helpers.JavaHelper;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
 import net.minecraft.particles.BlockParticleData;
@@ -13,6 +14,8 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 
+import java.util.Set;
+
 public class UnderInstrumentsConstructionBlock extends ModBlock {
     public UnderInstrumentsConstructionBlock(String name, Properties properties) {
         super(name, properties);
@@ -20,8 +23,8 @@ public class UnderInstrumentsConstructionBlock extends ModBlock {
 
 
     @Override
-    public Class<? extends ModTileEntity> getTileEntityClass() {
-        return UnderInstrumentsConstructionTileEntity.class;
+    public Set<Class<? extends ModTileEntity>> getTileEntityClasses() {
+        return JavaHelper.newHashSet(UnderInstrumentsConstructionTileEntity.class);
     }
 
     // Maybe I will add more matches if needed

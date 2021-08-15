@@ -1,10 +1,10 @@
 package mod.unclecat.uc_auramagic.util.helpers;
 
-import net.minecraft.nbt.DoubleNBT;
-import net.minecraft.nbt.IntNBT;
-import net.minecraft.nbt.ListNBT;
+import net.minecraft.nbt.*;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
+
+import java.util.function.Consumer;
 
 public class NBTHelper
 {
@@ -36,5 +36,23 @@ public class NBTHelper
 	public static Vec3i nbtToDoubleCoordinates(ListNBT value)
 	{
 		return new Vec3i(value.getDouble(0), value.getDouble(1), value.getDouble(2));
+	}
+
+	public static void runIfHas(CompoundNBT nbt, String key, Consumer<INBT> runIfHas)
+	{
+		if (nbt.contains(key))
+		{
+			runIfHas.accept(nbt.get(key));
+		}
+	}
+
+	public static void runIfHas(CompoundNBT nbt, String key, Consumer<INBT> runIfHas, Runnable orElse)
+	{
+		if (nbt.contains(key))
+		{
+			runIfHas.accept(nbt.get(key));
+		} else {
+			orElse.run();
+		}
 	}
 }

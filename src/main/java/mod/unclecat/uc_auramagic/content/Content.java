@@ -5,10 +5,7 @@ import java.util.Map.Entry;
 
 import mod.unclecat.uc_auramagic.Auramagic;
 import mod.unclecat.uc_auramagic.content.block.ModBlock;
-import mod.unclecat.uc_auramagic.content.block.content.BlockExperienceBlock;
-import mod.unclecat.uc_auramagic.content.block.content.BlockTable;
-import mod.unclecat.uc_auramagic.content.block.content.CommonNoSmeltOre;
-import mod.unclecat.uc_auramagic.content.block.content.UnderInstrumentsConstructionBlock;
+import mod.unclecat.uc_auramagic.content.block.content.*;
 import mod.unclecat.uc_auramagic.content.experience_gem.EnumExperienceColor;
 import mod.unclecat.uc_auramagic.content.item.ModItem;
 import mod.unclecat.uc_auramagic.content.item.content.InstrumentItem;
@@ -86,6 +83,14 @@ public class Content {
     public static CommonNoSmeltOre AMBER_ORE = new CommonNoSmeltOre("amber_ore", 3.0F, 2, new ItemStack(AMBER, 1), 3, 3);
     public static CommonNoSmeltOre AMETHYST_ORE = new CommonNoSmeltOre("amethyst_ore", 3.0F, 2, new ItemStack(AMETHYST, 1), 3, 3);
 
+    // Fundament
+    public static ModBlock OVERWORLD_FUNDAMENT = new ModBlock("overworld_fundament", Block.Properties.from(Blocks.STONE).hardnessAndResistance(2.5f, 7f));
+    public static ModBlock NETHER_FUNDAMENT = new ModBlock("nether_fundament", Block.Properties.from(Blocks.STONE).hardnessAndResistance(2.5f, 7f));
+    public static ModBlock END_FUNDAMENT = new ModBlock("end_fundament", Block.Properties.from(Blocks.STONE).hardnessAndResistance(2.5f, 7f));
+
+    // Loom
+    public static LoomBlock LOOM_BLOCK = new LoomBlock();
+
     // Etc.
     public static BlockTable WOODEN_TABLE = new BlockTable("wooden_table", Block.Properties.from(Blocks.OAK_PLANKS).harvestTool(ToolType.AXE).harvestLevel(1));
     public static BlockTable STONE_TABLE = new BlockTable("stone_table", Block.Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE).harvestLevel(1));
@@ -131,16 +136,22 @@ public class Content {
         Map<Class<? extends ModTileEntity>, List<Block>> types = new HashMap<Class<? extends ModTileEntity>, List<Block>>();
 
         for (ModBlock i : list) {
-            Class<? extends ModTileEntity> te = i.getTileEntityClass();
-            if (te == null) continue;
-            List<Block> validBlocks = types.get(te);
+            Set<Class<? extends ModTileEntity>> tes = i.getTileEntityClasses();
 
-            if (validBlocks == null) {
-                validBlocks = new ArrayList<Block>();
-                types.put(te, validBlocks);
+            if (tes == null || tes.isEmpty()) continue;
+
+            for (Class<? extends ModTileEntity> j : tes) {
+                List<Block> validBlocks = types.get(j);
+
+                if (validBlocks == null) {
+                    validBlocks = new ArrayList<Block>();
+                    types.put(j, validBlocks);
+                }
+
+                validBlocks.add(i);
             }
 
-            validBlocks.add(i);
+
         }
 
         Set<Entry<Class<? extends ModTileEntity>, List<Block>>> set = types.entrySet();

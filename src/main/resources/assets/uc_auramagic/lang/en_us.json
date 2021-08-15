@@ -30,6 +30,9 @@
 	"block.uc_auramagic.sapphire_ore": "Sapphire ore",
 	"block.uc_auramagic.amethyst_ore": "Amethyst ore",
 	"block.uc_auramagic.amber_ore": "Amber ore",
+	"block.uc_auramagic.overworld_fundament": "Overworld fundament",
+	"block.uc_auramagic.nether_fundament": "Nether fundament",
+	"block.uc_auramagic.end_fundament": "End fundament",
 	
 	"block.uc_auramagic.experience_block_fire": "Ignitum experience block",
 	"block.uc_auramagic.experience_block_air": "Aerum experience block",

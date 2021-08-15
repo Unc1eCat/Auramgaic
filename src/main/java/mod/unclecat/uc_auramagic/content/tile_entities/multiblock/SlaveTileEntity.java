@@ -7,7 +7,8 @@ import net.minecraft.nbt.ListNBT;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.math.BlockPos;
 
-
+/// Slaves are not supposed to store any state or handle any game logic. They are just used to refer to the master and mark boundaries of a construction.
+/// Though in some cases you might want to subclass this to introduce some logic
 public class SlaveTileEntity extends ModTileEntity implements IMultiblockTileEntity
 {
 	public static TileEntityType<SlaveTileEntity> TYPE;
@@ -59,11 +60,10 @@ public class SlaveTileEntity extends ModTileEntity implements IMultiblockTileEnt
 		
 	}
 	
-	
 	@SuppressWarnings("unchecked")
-	public <T extends MasterTileEntity> T getMaster()
+	public MasterTileEntity getMaster()
 	{
-		return (T) world.getTileEntity(getMasterPos());
+		return (MasterTileEntity) world.getTileEntity(getMasterPos());
 	}
 
 	public BlockPos getMasterPos()

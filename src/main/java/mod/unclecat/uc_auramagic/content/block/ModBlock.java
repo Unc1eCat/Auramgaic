@@ -55,15 +55,23 @@ public class ModBlock extends Block implements ILootTableSource, IItemModelSourc
         setDefaultState(getDefaultState().with(property, value));
     }
 
-    public Class<? extends ModTileEntity> getTileEntityClass() {
-        return null;
+    /// WARNING!!! If it returns more than one class then you must implement your own logic in the "createTileEntity" method
+    public Set<Class<? extends ModTileEntity>> getTileEntityClasses() {
+        return Collections.emptySet();
     }
 
     @SuppressWarnings("unchecked")
     @Override
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+        Set<Class<? extends ModTileEntity>> classes = getTileEntityClasses();
+
+        if (classes.size() > 1) {
+            Auramagic.LOG.error("If \"getTileEntityClasses\" returns more than one class then you must override \"createTileEntity\" because default implementation of \"createTileEntity\" does not support this", new UnsupportedOperationException("If \"getTileEntityClasses\" returns more than one class then you must override \"createTileEntity\" because default implementation of \"createTileEntity\" does not support this"));
+            return null;
+        }
+
         try {
-            return ((TileEntityType<? extends TileEntity>) getTileEntityClass().getDeclaredField("TYPE").get(null)).create();
+            return ((TileEntityType<? extends TileEntity>) classes.iterator().next().getDeclaredField("TYPE").get(null)).create();
         } catch (Exception e) {
             Auramagic.LOG.error("Could not create tile entity for block " + this.toString());
             e.printStackTrace();
@@ -73,7 +81,7 @@ public class ModBlock extends Block implements ILootTableSource, IItemModelSourc
 
     @Override
     public boolean hasTileEntity(BlockState state) {
-        return getTileEntityClass() != null;
+        return getTileEntityClasses().size() == 1;
     }
 
 //	@Override

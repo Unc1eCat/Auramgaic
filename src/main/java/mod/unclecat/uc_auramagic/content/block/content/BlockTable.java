@@ -1,6 +1,8 @@
 package mod.unclecat.uc_auramagic.content.block.content;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import mod.unclecat.uc_auramagic.content.ItemGroupAurmagic;
@@ -26,52 +28,46 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
-public class BlockTable extends ModBlock
-{
+public class BlockTable extends ModBlock {
 //	public static BooleanProperty NORTH = BooleanProperty.create("north");
 //	public static BooleanProperty EAST = BooleanProperty.create("east");
 //	public static BooleanProperty SOUTH = BooleanProperty.create("south");
 //	public static BooleanProperty WEST = BooleanProperty.create("west");
-	
-	VoxelShape SHAPE = BlockHelper.mix(
-			0, 13, 0, 16, 16, 16,
-			2, 0, 2, 4, 13, 4, 
-			12, 0, 2, 14, 13, 4,
-			2, 0, 12, 4, 13, 14,
-			12, 0, 12, 14, 13, 14);
-	
-	
-	public BlockTable(String name, Properties properties)
-	{
-		super(name, properties.hardnessAndResistance(3.0f), ItemGroupAurmagic.INSTANCE, null);
-	}
-	
-	
-	public ActionResultType func_225533_a_(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult rayTrace) 
-	{
-		TableTileEntity te = (TableTileEntity) world.getTileEntity(pos);
-		
-		if (rayTrace.getHitVec().y - pos.getY() < 0.999) return ActionResultType.PASS;
-		
-		int index = getIndexClicked(rayTrace.getHitVec().x - pos.getX(), rayTrace.getHitVec().z - pos.getZ());
-		
-		if (te.getStackInSlot(index).isEmpty())
-		{
-			ItemStack playerStack = player.getHeldItemMainhand();
-			te.setInventorySlotContents(index, playerStack.split(1));
-			player.setHeldItem(Hand.MAIN_HAND, playerStack);
-		}
-		else
-		{
-			Block.spawnAsEntity(world, pos.add(0, 1, 0), te.getStackInSlot(index));
-			te.setInventorySlotContents(index, ItemStack.EMPTY);
-		}
-		
-		return ActionResultType.SUCCESS;
-	}
-	
-	
-	// TODO: Make it connected textures
+
+    VoxelShape SHAPE = BlockHelper.mix(
+            0, 13, 0, 16, 16, 16,
+            2, 0, 2, 4, 13, 4,
+            12, 0, 2, 14, 13, 4,
+            2, 0, 12, 4, 13, 14,
+            12, 0, 12, 14, 13, 14);
+
+
+    public BlockTable(String name, Properties properties) {
+        super(name, properties.hardnessAndResistance(3.0f), ItemGroupAurmagic.INSTANCE, null);
+    }
+
+
+    public ActionResultType func_225533_a_(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult rayTrace) {
+        TableTileEntity te = (TableTileEntity) world.getTileEntity(pos);
+
+        if (rayTrace.getHitVec().y - pos.getY() < 0.999) return ActionResultType.PASS;
+
+        int index = getIndexClicked(rayTrace.getHitVec().x - pos.getX(), rayTrace.getHitVec().z - pos.getZ());
+
+        if (te.getStackInSlot(index).isEmpty()) {
+            ItemStack playerStack = player.getHeldItemMainhand();
+            te.setInventorySlotContents(index, playerStack.split(1));
+            player.setHeldItem(Hand.MAIN_HAND, playerStack);
+        } else {
+            Block.spawnAsEntity(world, pos.add(0, 1, 0), te.getStackInSlot(index));
+            te.setInventorySlotContents(index, ItemStack.EMPTY);
+        }
+
+        return ActionResultType.SUCCESS;
+    }
+
+
+    // TODO: Make it connected textures
 //	@Override
 //	public BlockState getStateForPlacement(BlockState state, Direction facing, BlockState state2, IWorld world,
 //			BlockPos pos1, BlockPos pos2, Hand hand)
@@ -83,91 +79,81 @@ public class BlockTable extends ModBlock
 //		
 //		return state;
 //	}
-	
+
 //	@Override
 //	public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos,
 //			boolean isMoving)
 //	{
 //		if (worldIn.getBlockState(fromPos).getBlock() == this) worldIn.setBlockState(pos, getStateForPlacement(state, null, null, worldIn, pos, null, null));
 //	}
-	
-	@Override
-	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)
-	{
-		return SHAPE;
-	}
-	
-	@Override
-	public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player)
-	{
-		super.onBlockHarvested(worldIn, pos, state, player);
-		((TableTileEntity)worldIn.getTileEntity(pos)).spawnDrop(pos);
-	}
-	
-	@Override
-	public void onBlockExploded(BlockState state, World world, BlockPos pos, Explosion explosion)
-	{
-		((TableTileEntity)world.getTileEntity(pos)).spawnDrop(pos);
-		super.onBlockExploded(state, world, pos, explosion);
-	}
 
-	@Override
-	public Class<? extends ModTileEntity> getTileEntityClass()
-	{
-		return TableTileEntity.class;
-	}
-	
-	public static int getIndexClicked(double x, double y)
-	{
-		int slotX = (int) (x / 0.33333);
-		int slotY = (int) (y / 0.33333);
-		
-		return slotX + slotY * 3;
-	}
-	
-	
-	public static boolean doesItemsMatchByItemShaped(World world, BlockPos pos, Direction direction, Item... requiredItems)
-	{
-		TableTileEntity te = (TableTileEntity) world.getTileEntity(pos);
-		
-		List<List<Item>> requiredItemsList = HorizontalRotationlessMatcher.rotateTwoDimListOnTopOfBlock(JavaHelper.asTwoDimList(3, requiredItems), direction);
+    @Override
+    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+        return SHAPE;
+    }
 
-		System.out.println(requiredItemsList.toString());
+    @Override
+    public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
+        super.onBlockHarvested(worldIn, pos, state, player);
+        ((TableTileEntity) worldIn.getTileEntity(pos)).spawnDrop(pos);
+    }
 
-		for (int i = 0; i < 3; i++)
-		{
-			for (int j = 0; j < 3; j++)
-			{
-				if (te.getStackInSlot(i * 3 + j).getItem() != requiredItemsList.get(i).get(j))
-				{
-					return false;
-				}
-			}
-		}
-		
-		return true;
-	}
-	public static boolean doesItemsMatchByPredicateShaped(World world, BlockPos pos, Direction direction, Predicate<ItemStack>... requiredItems)
-	{
-		TableTileEntity te = (TableTileEntity) world.getTileEntity(pos);
-		boolean ret = true;
-		
-		List<List<Predicate<ItemStack>>> requiredItemsList = HorizontalRotationlessMatcher.rotateTwoDimListOnTopOfBlock(JavaHelper.asTwoDimList(3, requiredItems), direction);
-		
-		for (int i = 0; i < 3; i++)
-		{
-			for (int j = 0; j < 3; j++)
-			{
-				if (!requiredItemsList.get(i).get(j).test(te.getStackInSlot(i * 3 + j)))
-				{
-					ret = false;
-					break;
-				}
-			}
-		}
-		
-		return ret;
-	}
+    @Override
+    public void onBlockExploded(BlockState state, World world, BlockPos pos, Explosion explosion) {
+        ((TableTileEntity) world.getTileEntity(pos)).spawnDrop(pos);
+        super.onBlockExploded(state, world, pos, explosion);
+    }
+
+    @Override
+    public Set<Class<? extends ModTileEntity>> getTileEntityClasses() {
+        return new HashSet<Class<? extends ModTileEntity>>() {{
+            add(TableTileEntity.class);
+        }};
+    }
+
+    public static int getIndexClicked(double x, double y) {
+        int slotX = (int) (x / 0.33333);
+        int slotY = (int) (y / 0.33333);
+
+        return slotX + slotY * 3;
+    }
+
+
+    public static boolean doesItemsMatchByItemShaped(World world, BlockPos pos, Direction direction, Item... requiredItems) {
+        TableTileEntity te = (TableTileEntity) world.getTileEntity(pos);
+
+        List<List<Item>> requiredItemsList = HorizontalRotationlessMatcher.rotateTwoDimListOnTopOfBlock(JavaHelper.asTwoDimList(3, requiredItems), direction);
+
+        System.out.println(requiredItemsList.toString());
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (te.getStackInSlot(i * 3 + j).getItem() != requiredItemsList.get(i).get(j)) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    public static boolean doesItemsMatchByPredicateShaped(World world, BlockPos pos, Direction direction, Predicate<ItemStack>... requiredItems) {
+        TableTileEntity te = (TableTileEntity) world.getTileEntity(pos);
+        boolean ret = true;
+
+        List<List<Predicate<ItemStack>>> requiredItemsList = HorizontalRotationlessMatcher.rotateTwoDimListOnTopOfBlock(JavaHelper.asTwoDimList(3, requiredItems), direction);
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (!requiredItemsList.get(i).get(j).test(te.getStackInSlot(i * 3 + j))) {
+                    ret = false;
+                    break;
+                }
+            }
+        }
+
+        return ret;
+    }
 }
 
 
