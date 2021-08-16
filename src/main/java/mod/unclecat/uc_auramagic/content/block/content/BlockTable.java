@@ -122,7 +122,7 @@ public class BlockTable extends ModBlock {
     public static boolean doesItemsMatchByItemShaped(World world, BlockPos pos, Direction direction, Item... requiredItems) {
         TableTileEntity te = (TableTileEntity) world.getTileEntity(pos);
 
-        List<List<Item>> requiredItemsList = HorizontalRotationlessMatcher.rotateTwoDimListOnTopOfBlock(JavaHelper.asTwoDimList(3, requiredItems), direction);
+        List<List<Item>> requiredItemsList = JavaHelper.rotateTwoDimList(JavaHelper.asTwoDimList(3, requiredItems), direction);
 
         System.out.println(requiredItemsList.toString());
 
@@ -141,7 +141,7 @@ public class BlockTable extends ModBlock {
         TableTileEntity te = (TableTileEntity) world.getTileEntity(pos);
         boolean ret = true;
 
-        List<List<Predicate<ItemStack>>> requiredItemsList = HorizontalRotationlessMatcher.rotateTwoDimListOnTopOfBlock(JavaHelper.asTwoDimList(3, requiredItems), direction);
+        List<List<Predicate<ItemStack>>> requiredItemsList = JavaHelper.rotateTwoDimList(JavaHelper.asTwoDimList(3, requiredItems), direction);
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {

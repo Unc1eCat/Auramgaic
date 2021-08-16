@@ -167,14 +167,15 @@ public class RegistryHelper {
         type.setRegistryName(Auramagic.prefix(RegistryHelper.classNameToRegistryName(entry.getKey())));
         registry.register(type);
 
-        try {
-            entry.getKey().getDeclaredField("TYPE").set(null, type);
-        } catch (Exception e1) {
-            Auramagic.LOG.error("Could not find tile entity type field for class " + entry.getKey().toString());
-            e1.printStackTrace();
-            return;
-        }
+//        try {
+//            entry.getKey().getDeclaredField("TYPE").set(null, type);
+//        } catch (Exception e1) {
+//            Auramagic.LOG.error("Could not find tile entity type field for class " + entry.getKey().toString());
+//            e1.printStackTrace();
+//            return;
+//        }
 
+        // Below finds and registers TER
         DistExecutor.runWhenOn(Dist.CLIENT, () -> () ->
         {
             Class<Y> ter = ModTileEntity.getTERClass((Class <T>) entry.getKey());

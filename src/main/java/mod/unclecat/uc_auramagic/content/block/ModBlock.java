@@ -71,9 +71,9 @@ public class ModBlock extends Block implements ILootTableSource, IItemModelSourc
         }
 
         try {
-            return ((TileEntityType<? extends TileEntity>) classes.iterator().next().getDeclaredField("TYPE").get(null)).create();
+            return classes.iterator().next().getDeclaredConstructor().newInstance();
         } catch (Exception e) {
-            Auramagic.LOG.error("Could not create tile entity for block " + this.toString());
+            Auramagic.LOG.error("Could not create tile entity for block " + this);
             e.printStackTrace();
             return null;
         }

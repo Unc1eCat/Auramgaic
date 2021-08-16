@@ -10,6 +10,4 @@ public class LoomSlaveTileEntity extends SlaveTileEntity {
     {
         super(TYPE);
     }
-
-
 }
