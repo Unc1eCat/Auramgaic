@@ -12,11 +12,10 @@ import net.minecraftforge.registries.ForgeRegistries;
 import javax.annotation.OverridingMethodsMustInvokeSuper;
 import javax.annotation.Resource;
 
-/// Each of the subclasses that are actually used in world(not abstract or such) must have this line in them:
+/// If some of subclasses of this are actually used in world(not abstract or such) and have this line in them:
 /// public static TileEntityType<X> TYPE;
 /// Where X is the name of the class this line is in
-/// This is used when registering TEs. Tho imo types are pretty useless
-/// Maybe i'll encapsulate it with a setter and a getter
+/// Than it will be set to the actual type of the TE. It's optional
 public abstract class ModTileEntity extends TileEntity {
     public ModTileEntity(TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
