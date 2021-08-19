@@ -12,6 +12,8 @@ import mod.unclecat.uc_auramagic.util.helpers.BlockHelper;
 import mod.unclecat.uc_auramagic.util.helpers.JavaHelper;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.util.Direction;
@@ -23,6 +25,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.LootTable;
 
+import javax.annotation.Nullable;
 import java.util.Map;
 import java.util.Set;
 
@@ -61,17 +64,19 @@ public class LoomBlock extends MultiblockBlock {
         return BlockHelper.rotateVoxelShape(state.get(FACING), SHAPES[state.get(PART)]);
     }
 
+
     @Override
-    public void onBlockAdded(BlockState p_220082_1_, World p_220082_2_, BlockPos p_220082_3_, BlockState p_220082_4_, boolean p_220082_5_) {
-        super.onBlockAdded(p_220082_1_, p_220082_2_, p_220082_3_, p_220082_4_, p_220082_5_);
-        try {
-            if (p_220082_4_.get(PART) != 0) return;
-            LoomMasterTileEntity te = (LoomMasterTileEntity) p_220082_2_.getTileEntity(p_220082_3_);
-            te.facing = p_220082_4_.get(FACING);
-        } catch (Exception e) {
-            Auramagic.LOG.error(String.format("Exception while receiving of destruction by player event in multiblock. State: {}", p_220082_2_.getBlockState(p_220082_3_)));
-            e.printStackTrace();
-        }
+    public void onBlockPlacedBy(World p_180633_1_, BlockPos p_180633_2_, BlockState p_180633_3_, @Nullable LivingEntity p_180633_4_, ItemStack p_180633_5_) {
+        super.onBlockPlacedBy(p_180633_1_, p_180633_2_, p_180633_3_, p_180633_4_, p_180633_5_);
+
+//        try {
+//            if (p_180633_3_.get(PART) != 0) return;
+//            LoomMasterTileEntity te = (LoomMasterTileEntity) p_180633_1_.getTileEntity(p_180633_2_);
+//            te.facing = p_180633_3_.get(FACING);
+//        } catch (Exception e) {
+//            Auramagic.LOG.error(String.format("Exception in onBlockPlacedBy in multiblock. State: {}", p_180633_3_));
+//            e.printStackTrace();
+//        }
     }
 
     @Override

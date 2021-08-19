@@ -4,9 +4,11 @@ import mod.unclecat.uc_auramagic.content.Content;
 import mod.unclecat.uc_auramagic.content.block.content.LoomBlock;
 import mod.unclecat.uc_auramagic.content.tile_entities.multiblock.*;
 import mod.unclecat.uc_auramagic.util.helpers.FXHelper;
+import mod.unclecat.uc_auramagic.util.helpers.NBTHelper;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.BlockParticleData;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.tileentity.TileEntityType;
@@ -25,8 +27,22 @@ public class LoomMasterTileEntity extends DisassemblableMasterTileEntity {
         super(TYPE);
     }
 
-    public LoomMasterTileEntity(List<AxisAlignedBB> slaveSpots) {
+    public LoomMasterTileEntity(List<AxisAlignedBB> slaveSpots, Direction facing) {
         super(TYPE, slaveSpots);
+        this.facing = facing;
+    }
+
+    @Override
+    public void readData(CompoundNBT nbt) {
+        super.readData(nbt);
+        facing = Direction.values()[nbt.getInt("facing")];
+    }
+
+    @Override
+    public CompoundNBT writeData(CompoundNBT nbt) {
+        super.writeData(nbt);
+        nbt.putInt("facing", facing.ordinal());
+        return nbt;
     }
 
     @Override
@@ -37,12 +53,6 @@ public class LoomMasterTileEntity extends DisassemblableMasterTileEntity {
     @Override
     public void onPartsNeighbourChanged(MultiblockTileEntity part, BlockPos fromPos) {
 
-    }
-
-    @Override
-    public void onLoad() {
-        super.onLoad();
-        facing = getBlockState().get(LoomBlock.FACING);
     }
 
     @Override

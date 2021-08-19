@@ -3,16 +3,15 @@
 
   "pattern":
   [
-    "S  ",
-    "SS ",
-    "SSS"
+    "SS",
+    "SS"
   ],
 
   "key":
   {
     "S":
     {
-      "uc_auramagic": "elderly_stone"
+      "item": "uc_auramagic:elderly_stone"
     }
   },
 

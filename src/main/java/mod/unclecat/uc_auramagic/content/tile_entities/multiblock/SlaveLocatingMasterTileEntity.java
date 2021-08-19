@@ -15,18 +15,18 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
 
-public abstract class LazySlaveLocatingMasterTileEntity extends MasterTileEntity {
+public abstract class SlaveLocatingMasterTileEntity extends MasterTileEntity {
 
     /// This list represents a 3D area within which all slaves of this master are situated, and none of them can be not within the area.
     /// The area can cover blocks other than slaves and the master
     /// A slave is not allowed to be in two spots simultaneously
     protected List<AxisAlignedBB> slaveSpotsPosition;
 
-    public LazySlaveLocatingMasterTileEntity(TileEntityType<?> type) {
+    public SlaveLocatingMasterTileEntity(TileEntityType<?> type) {
         super(type);
     }
 
-    public LazySlaveLocatingMasterTileEntity(TileEntityType<?> type, List<AxisAlignedBB> slaveSpotsPosition) {
+    public SlaveLocatingMasterTileEntity(TileEntityType<?> type, List<AxisAlignedBB> slaveSpotsPosition) {
         super(type);
         this.slaveSpotsPosition = slaveSpotsPosition;
         this.slaveSpotsPosition = slaveSpotsPosition;
@@ -55,6 +55,11 @@ public abstract class LazySlaveLocatingMasterTileEntity extends MasterTileEntity
         for (int i = 0; i < list.size(); i += 2) {
             slaveSpotsPosition.add(new AxisAlignedBB(new BlockPos(NBTHelper.nbtToIntCoordinates(list.getList(i))), new BlockPos(NBTHelper.nbtToIntCoordinates(list.getList(i + 1)))));
         }
+    }
+
+    @Override
+    public boolean isInTheSameMultiblock(MultiblockTileEntity te) {
+        return ((MasterLocatingSlaveTileEntity)te).masterPos.equals(pos);
     }
 
     @Override

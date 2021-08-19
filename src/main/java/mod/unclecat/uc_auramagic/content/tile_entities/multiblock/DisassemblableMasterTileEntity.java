@@ -7,7 +7,7 @@ import net.minecraft.util.math.BlockPos;
 import javax.annotation.OverridingMethodsMustInvokeSuper;
 import java.util.List;
 
-public class DisassemblableMasterTileEntity extends LazySlaveLocatingMasterTileEntity implements IDisassemblablePart {
+public class DisassemblableMasterTileEntity extends SlaveLocatingMasterTileEntity implements IDisassemblablePart {
     protected boolean isAssembled = true;
 
     public DisassemblableMasterTileEntity(TileEntityType<?> type) {
@@ -40,11 +40,6 @@ public class DisassemblableMasterTileEntity extends LazySlaveLocatingMasterTileE
         if (isAssembled) {
             getMaster().onPartsNeighbourChanged(this, fromPos);
         }
-    }
-
-    @Override
-    public boolean isInTheSameMultiblock(MultiblockTileEntity te) {
-        return ((MasterLocatingSlaveTileEntity)te).masterPos == pos;
     }
 
     @OverridingMethodsMustInvokeSuper

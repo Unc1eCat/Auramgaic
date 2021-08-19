@@ -8,6 +8,10 @@ public class DisassemblableSlaveTileEntity extends MasterLocatingSlaveTileEntity
 
     protected boolean isAssembled = true;
 
+    public DisassemblableSlaveTileEntity() {
+        super(TYPE);
+    }
+
     public DisassemblableSlaveTileEntity(BlockPos masterPos) {
         super(TYPE, masterPos);
     }
@@ -36,10 +40,10 @@ public class DisassemblableSlaveTileEntity extends MasterLocatingSlaveTileEntity
 
     public void disassemble() {
         isAssembled = false;
-        onDissasemble();
+        onDisassemble();
     }
 
-    public void onDissasemble() {
+    public void onDisassemble() {
 
     }
 

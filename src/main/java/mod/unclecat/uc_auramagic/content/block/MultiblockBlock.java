@@ -7,6 +7,7 @@ import mod.unclecat.uc_auramagic.util.helpers.JavaHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.IFluidState;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -44,63 +45,8 @@ public abstract class MultiblockBlock extends ModBlock {
     }
 
     // TODO: Make the correct way to observe the destroy event (see the 3 overrides below)
-//    @SuppressWarnings("unchecked")
-//    @Override
-    public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
-        try {
-            super.onBlockHarvested(worldIn, pos, state, player);
-
-            MultiblockTileEntity te = (MultiblockTileEntity) worldIn.getTileEntity(pos);
-
-//            te.onDestroyed();
-        } catch (Exception e) {
-            Auramagic.LOG.error(String.format("Exception while receiving of harvest event in multiblock. State: {}", state));
-            e.printStackTrace();
-        }
-    }
-
-//    @Override
-//    public void onExplosionDestroy(World worldIn, BlockPos pos, Explosion explosion) {
-//        try {
-//            super.onExplosionDestroy(worldIn, pos, explosion);
-//
-//            MultiblockTileEntity te = (MultiblockTileEntity) worldIn.getTileEntity(pos);
-//
-//            te.onDestroyed();
-//        } catch (Exception e) {
-//            Auramagic.LOG.error(String.format("Exception while receiving of destruction by explosion event in multiblock. State: {}", worldIn.getBlockState(pos)));
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    @Override
-//    public void onPlayerDestroy(IWorld worldIn, BlockPos pos, BlockState p_176206_3_) {
-//        try {
-//            super.onPlayerDestroy(worldIn, pos, p_176206_3_);
-//
-//            MultiblockTileEntity te = (MultiblockTileEntity) worldIn.getTileEntity(pos);
-//
-//            te.onDestroyed();
-//        } catch (Exception e) {
-//            Auramagic.LOG.error(String.format("Exception while receiving of destruction by player event in multiblock. State: {}", worldIn.getBlockState(pos)));
-//            e.printStackTrace();
-//        }
-//    }
-
     // TODO: AAAAAAAAAAAAAAAARARAARARRRRRRRGGGHHHH MAKE THE ONDESTROY GO BEFORE BOTH THE TE AND THE STATE ARE GONE
-    @Override
-    public void onReplaced(BlockState p_196243_1_, World worldIn, BlockPos pos, BlockState state, boolean p_196243_5_) {
-        try {
-            MultiblockTileEntity te = (MultiblockTileEntity) worldIn.getTileEntity(pos);
-//            te.onDestroyed();
-        } catch (Exception e) {
-            Auramagic.LOG.error(String.format("Exception while receiving of destruction by player event in multiblock. State: {}", worldIn.getBlockState(pos)));
-            e.printStackTrace();
-        }
-        super.onReplaced(p_196243_1_, worldIn, pos, state, p_196243_5_);
-    }
 
-    @SuppressWarnings("unchecked")
     @Override
     public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos,
                                 boolean isMoving) {

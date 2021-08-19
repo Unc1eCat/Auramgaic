@@ -64,7 +64,7 @@ public class LoomCreator implements IMultiblockCreator {
                         w.setTileEntity(p, new DisassemblableSlaveTileEntity(mp));
 
                         w.setBlockState(p = p.down(), Content.LOOM_BLOCK.getDefaultState().with(LoomBlock.PART, 0).with(LoomBlock.FACING, d));
-                        w.setTileEntity(p, new LoomMasterTileEntity(Lists.newArrayList(new AxisAlignedBB(p, p.offset(d.getOpposite()).up()))));
+                        w.setTileEntity(p, new LoomMasterTileEntity(Lists.newArrayList(new AxisAlignedBB(p, p.offset(d.getOpposite()).up())), d));
                     }
                 }
 
