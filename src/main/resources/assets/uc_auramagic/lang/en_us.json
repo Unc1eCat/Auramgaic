@@ -18,22 +18,37 @@
 	"item.uc_auramagic.wrench": "Wrench",
 	"item.uc_auramagic.hammer": "Hammer",
 	"item.uc_auramagic.screw_driver": "Screw driver",
-	
+
 	"item.uc_auramagic.metal_plate": "Metal plate",
 	"item.uc_auramagic.metal_stick": "Metal stick",
 	"item.uc_auramagic.aura_tissue": "Aura tissue",
 	"item.uc_auramagic.aura_filament": "Aura filament",
 	"item.uc_auramagic.cloth": "Cloth",
-	
+
 	"block.uc_auramagic.ruby_ore": "Ruby ore",
 	"block.uc_auramagic.topaz_ore": "Topaz ore",
 	"block.uc_auramagic.sapphire_ore": "Sapphire ore",
 	"block.uc_auramagic.amethyst_ore": "Amethyst ore",
 	"block.uc_auramagic.amber_ore": "Amber ore",
+
+	"block.uc_auramagic.broken_overworld_fundament": "Broken overworld fundament",
+	"block.uc_auramagic.broken_nether_fundament": "Broken nether fundament",
+	"block.uc_auramagic.broken_end_fundament": "Broken end fundament",
 	"block.uc_auramagic.overworld_fundament": "Overworld fundament",
 	"block.uc_auramagic.nether_fundament": "Nether fundament",
 	"block.uc_auramagic.end_fundament": "End fundament",
-	
+
+	"block.uc_auramagic.armature": "Armature",
+
+	"block.uc_auramagic.armoured_elderly_stone": "Armoured elderly stone",
+	"block.uc_auramagic.elderly_stone": "Elderly stone",
+	"block.uc_auramagic.elderly_stone_bricks": "Elderly stone bricks",
+	"block.uc_auramagic.elderly_stone_pillar": "Elderly stone pillar",
+	"block.uc_auramagic.elderly_stone_slab": "Elderly stone slab",
+	"block.uc_auramagic.elderly_stone_bricks_slab": "Elderly stone bricks slab",
+	"block.uc_auramagic.elderly_stone_stairs": "Elderly stone stairs",
+	"block.uc_auramagic.elderly_stone_bricks_stairs": "Elderly stone bricks stairs",
+
 	"block.uc_auramagic.experience_block_fire": "Ignitum experience block",
 	"block.uc_auramagic.experience_block_air": "Aerum experience block",
 	"block.uc_auramagic.experience_block_earth": "Terra experience block",

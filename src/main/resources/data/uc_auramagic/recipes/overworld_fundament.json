@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	
+	"ingredients":
+	[
+		{
+			"item": "uc_auramagic:broken_overworld_fundament"
+		},
+		{
+			"item": "uc_auramagic:armature"
+		}
+	],
+	
+	"result":
+	{
+		"item": "uc_auramagic:overworld_fundament",
+		"count": 1
+	}
+}

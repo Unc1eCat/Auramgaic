@@ -1,25 +1,48 @@
 package mod.unclecat.uc_auramagic.content.tile_entities.multiblock;
 
-import mod.unclecat.uc_auramagic.content.tile_entities.ModTileEntity;
-import net.minecraft.nbt.CompoundNBT;
+
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.math.BlockPos;
 
+import javax.annotation.OverridingMethodsMustInvokeSuper;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
 
-public abstract class MasterTileEntity extends ModTileEntity implements IMultiblockTileEntity
-{
-	public MasterTileEntity(TileEntityType<?> type)
-	{
-		super(type);
-	}
-	
-	public abstract void onSlaveDestroyed(SlaveTileEntity slave);
-	
-	public abstract void onSlavesNeighbourChanged(SlaveTileEntity slave);
-	
-	public <T extends SlaveTileEntity> boolean isItsSlave(T slave)
-	{
-		return slave.getMaster() == this;
-	}
+public abstract class MasterTileEntity extends MultiblockTileEntity {
+    public MasterTileEntity(TileEntityType<?> tileEntityTypeIn) {
+        super(tileEntityTypeIn);
+    }
 
+    @Override
+    public MasterTileEntity getMaster() {
+        return this;
+    }
+
+    public abstract void onPartDestroyed(MultiblockTileEntity part);
+
+    public abstract void onPartsNeighbourChanged(MultiblockTileEntity part, BlockPos fromPos);
+
+    @Override
+    public void onDestroyed() {
+        onPartDestroyed(this);
+    }
+
+    @Override
+    public void onNeighbourChanged(BlockPos fromPos) {
+        onPartsNeighbourChanged(this, fromPos);
+    }
+
+    @SuppressWarnings("unchecked")
+    public <T extends MasterLocatingSlaveTileEntity> List<T> getSlaves() {
+        List<T> list = new ArrayList<T>();
+
+        forEachSlave((t) -> {
+            list.add((T) t);
+        });
+
+        return list;
+    }
+
+    public abstract void forEachSlave(Consumer<SlaveTileEntity> consumer);
 }

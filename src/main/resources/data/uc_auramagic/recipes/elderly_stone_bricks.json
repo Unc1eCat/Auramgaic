@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern":
+  [
+    "S  ",
+    "SS ",
+    "SSS"
+  ],
+
+  "key":
+  {
+    "S":
+    {
+      "uc_auramagic": "elderly_stone"
+    }
+  },
+
+  "result":
+  {
+    "item": "uc_auramagic:elderly_stone_bricks",
+    "count": 2
+  }
+}

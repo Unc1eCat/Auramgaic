@@ -18,7 +18,7 @@ version="0.1" #mandatory
  # A display name for the mod
 displayName="Auramagic" #mandatory
 # A URL to query for updates for this mod. See the JSON update specification <here>
-updateJSONURL="https://www.reddit.com/user/AntonBespoiasov" #optional
+# updateJSONURL="" #optional
 # A URL for the "homepage" for this mod, displayed in the mod UI
 displayURL="https://www.reddit.com/user/AntonBespoiasov" #optional
 # A file name (in the root of the mod JAR) containing a logo for display

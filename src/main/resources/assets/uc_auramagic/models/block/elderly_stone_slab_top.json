@@ -1,0 +1,10 @@
+{
+	"parent": "block/slab_top",
+	
+	"textures":
+	{
+		"top": "uc_auramagic:block/elderly_stone",
+		"side": "uc_auramagic:block/elderly_stone",
+		"bottom": "uc_auramagic:block/elderly_stone"
+	}
+}

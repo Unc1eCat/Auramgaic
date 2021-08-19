@@ -3,8 +3,10 @@ package mod.unclecat.uc_auramagic.content.block;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.google.common.collect.Lists;
 import mod.unclecat.uc_auramagic.Auramagic;
 import mod.unclecat.uc_auramagic.content.Content;
 import mod.unclecat.uc_auramagic.content.tile_entities.ModTileEntity;
@@ -27,9 +29,6 @@ import net.minecraft.world.storage.loot.LootContext;
 import net.minecraft.world.storage.loot.LootTable;
 
 public class ModBlock extends Block implements ILootTableSource, IItemModelSource {
-    public List<IProperty<?>> externalProperties = new ArrayList<IProperty<?>>();
-
-
     public ModBlock(String name, Properties properties, @Nullable ItemGroup group, @Nullable Item.Properties itemProperties) {
         super(properties);
         setRegistryName(Auramagic.prefix(name));
@@ -42,13 +41,14 @@ public class ModBlock extends Block implements ILootTableSource, IItemModelSourc
         setRegistryName(Auramagic.prefix(name));
     }
 
-    public void addExternalProperty(IProperty<?> property) {
-        externalProperties.add(property);
-    }
-
     @Override
     protected void fillStateContainer(Builder<Block, BlockState> builder) {
         builder.add(BlockHelper.getPropertiesFromBlock(this).toArray(new IProperty<?>[]{}));
+    }
+
+    @Nonnull
+    public List<IProperty<?>> getExternalProperties() {
+        return Lists.newArrayList();
     }
 
     public <T extends Comparable<T>> void setDefaultValue(IProperty<T> property, T value) {
@@ -56,6 +56,7 @@ public class ModBlock extends Block implements ILootTableSource, IItemModelSourc
     }
 
     /// WARNING!!! If it returns more than one class then you must implement your own logic in the "createTileEntity" method
+    @Nonnull
     public Set<Class<? extends ModTileEntity>> getTileEntityClasses() {
         return Collections.emptySet();
     }

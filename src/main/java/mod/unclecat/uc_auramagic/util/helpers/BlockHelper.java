@@ -7,6 +7,7 @@ import java.util.List;
 import mod.unclecat.uc_auramagic.content.block.ModBlock;
 import net.minecraft.block.Block;
 import net.minecraft.state.IProperty;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.shapes.IBooleanFunction;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
@@ -32,8 +33,8 @@ public class BlockHelper
 				
 			}
 		}
-		
-		if (block.externalProperties != null) ret.addAll(block.externalProperties);
+
+		ret.addAll(block.getExternalProperties());
 		
 		return ret;
 	}
@@ -53,7 +54,9 @@ public class BlockHelper
 	}
 	
 	public static VoxelShape mix(double... points)
-	{	
+	{
+		assert(points.length % 6 == 0);
+
 		VoxelShape ret = VoxelShapes.empty();
 		
 		for (int i = 0; i < points.length; i += 6)
@@ -62,5 +65,18 @@ public class BlockHelper
 		}
 		
 		return ret;
+	}
+
+	public static VoxelShape rotateVoxelShape(Direction direction, VoxelShape shape) {
+		VoxelShape[] buffer = new VoxelShape[]{ shape, VoxelShapes.empty() };
+
+		int times = (direction.getHorizontalIndex() + 2) % 4;
+		for (int i = 0; i < times; i++) {
+			buffer[0].forEachBox((minX, minY, minZ, maxX, maxY, maxZ) -> buffer[1] = VoxelShapes.or(buffer[1], VoxelShapes.create(1-maxZ, minY, minX, 1-minZ, maxY, maxX)));
+			buffer[0] = buffer[1];
+			buffer[1] = VoxelShapes.empty();
+		}
+
+		return buffer[0];
 	}
 }

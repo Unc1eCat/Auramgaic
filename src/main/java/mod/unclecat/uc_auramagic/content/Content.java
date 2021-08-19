@@ -5,6 +5,8 @@ import java.util.Map.Entry;
 
 import mod.unclecat.uc_auramagic.Auramagic;
 import mod.unclecat.uc_auramagic.content.block.ModBlock;
+import mod.unclecat.uc_auramagic.content.block.ModSlabBlock;
+import mod.unclecat.uc_auramagic.content.block.ModStairsBlock;
 import mod.unclecat.uc_auramagic.content.block.content.*;
 import mod.unclecat.uc_auramagic.content.experience_gem.EnumExperienceColor;
 import mod.unclecat.uc_auramagic.content.item.ModItem;
@@ -13,8 +15,6 @@ import mod.unclecat.uc_auramagic.content.item.content.ItemExperienceGem;
 import mod.unclecat.uc_auramagic.content.item.content.ItemExperienceShard;
 import mod.unclecat.uc_auramagic.content.item.content.ItemHammer;
 import mod.unclecat.uc_auramagic.content.item.content.ItemWrench;
-import mod.unclecat.uc_auramagic.content.multiblock.Multiblocks;
-import mod.unclecat.uc_auramagic.content.multiblock.creators.instrument_work.InstrumentWorkMultiblockCreationTrigger;
 import mod.unclecat.uc_auramagic.content.multiblock.creators.instrument_work.LoomCreator;
 import mod.unclecat.uc_auramagic.content.recipies.content.RecipeExperienceBlock;
 import mod.unclecat.uc_auramagic.content.recipies.content.RecipeExperienceShard;
@@ -33,8 +33,6 @@ import net.minecraftforge.common.ToolType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
-import net.minecraftforge.registries.ForgeRegistries;
 
 @EventBusSubscriber(modid = Auramagic.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class Content {
@@ -84,14 +82,27 @@ public class Content {
     public static CommonNoSmeltOre AMETHYST_ORE = new CommonNoSmeltOre("amethyst_ore", 3.0F, 2, new ItemStack(AMETHYST, 1), 3, 3);
 
     // Fundament
-    public static ModBlock OVERWORLD_FUNDAMENT = new ModBlock("overworld_fundament", Block.Properties.from(Blocks.STONE).hardnessAndResistance(2.5f, 7f));
-    public static ModBlock NETHER_FUNDAMENT = new ModBlock("nether_fundament", Block.Properties.from(Blocks.STONE).hardnessAndResistance(2.5f, 7f));
-    public static ModBlock END_FUNDAMENT = new ModBlock("end_fundament", Block.Properties.from(Blocks.STONE).hardnessAndResistance(2.5f, 7f));
+    public static ArmaturedBlock OVERWORLD_FUNDAMENT = new ArmaturedBlock("overworld_fundament", Block.Properties.from(Blocks.STONE).hardnessAndResistance(2.5f, 7f), Content.BROKEN_OVERWORLD_FUNDAMENT, ItemGroupAurmagic.INSTANCE, null);
+    public static ArmaturedBlock NETHER_FUNDAMENT = new ArmaturedBlock("nether_fundament", Block.Properties.from(Blocks.STONE).hardnessAndResistance(2.5f, 7f), Content.BROKEN_NETHER_FUNDAMENT, ItemGroupAurmagic.INSTANCE, null);
+    public static ArmaturedBlock END_FUNDAMENT = new ArmaturedBlock("end_fundament", Block.Properties.from(Blocks.STONE).hardnessAndResistance(2.5f, 7f), Content.BROKEN_END_FUNDAMENT, ItemGroupAurmagic.INSTANCE, null);
+    public static ModBlock BROKEN_OVERWORLD_FUNDAMENT = new ModBlock("broken_overworld_fundament", Block.Properties.from(Blocks.STONE).hardnessAndResistance(2.5f, 7f), ItemGroupAurmagic.INSTANCE, null);
+    public static ModBlock BROKEN_NETHER_FUNDAMENT = new ModBlock("broken_nether_fundament", Block.Properties.from(Blocks.STONE).hardnessAndResistance(2.5f, 7f), ItemGroupAurmagic.INSTANCE, null);
+    public static ModBlock BROKEN_END_FUNDAMENT = new ModBlock("broken_end_fundament", Block.Properties.from(Blocks.STONE).hardnessAndResistance(2.5f, 7f), ItemGroupAurmagic.INSTANCE, null);
 
     // Loom
     public static LoomBlock LOOM_BLOCK = new LoomBlock();
 
+    // Elderly stone
+    public static ArmaturedBlock ARMOURED_ELDERLY_BLOCK = new ArmaturedBlock("armoured_elderly_stone", Block.Properties.from(Blocks.STONE), Content.ELDERLY_STONE, ItemGroupAurmagic.INSTANCE, null);
+    public static ModBlock ELDERLY_STONE = new ModBlock("elderly_stone", Block.Properties.from(Blocks.STONE), ItemGroupAurmagic.INSTANCE, null);
+    public static ModBlock ELDERLY_STONE_BRICKS = new ModBlock("elderly_stone_bricks", Block.Properties.from(Blocks.STONE_BRICKS), ItemGroupAurmagic.INSTANCE, null);
+    public static ModSlabBlock ELDERLY_STONE_SLAB = new ModSlabBlock("elderly_stone_slab", Block.Properties.from(Blocks.STONE), ItemGroupAurmagic.INSTANCE, null);
+    public static ModSlabBlock ELDERLY_STONE_BRICkS_SLAB = new ModSlabBlock("elderly_stone_bricks_slab", Block.Properties.from(Blocks.STONE_BRICKS), ItemGroupAurmagic.INSTANCE, null);
+    public static ModStairsBlock ELDERLY_STONE_STAIRS = new ModStairsBlock("elderly_stone_stairs", Block.Properties.from(Blocks.STONE_BRICKS), ItemGroupAurmagic.INSTANCE, null, Content.ELDERLY_STONE, null);
+    public static ModStairsBlock ELDERLY_STONE_BRICKS_STAIRS = new ModStairsBlock("elderly_stone_bricks_stairs", Block.Properties.from(Blocks.STONE_BRICKS), ItemGroupAurmagic.INSTANCE, null, Content.ELDERLY_STONE_BRICKS, null);
+
     // Etc.
+    public static ArmatureBlock ARMATURE = new ArmatureBlock();
     public static BlockTable WOODEN_TABLE = new BlockTable("wooden_table", Block.Properties.from(Blocks.OAK_PLANKS).harvestTool(ToolType.AXE).harvestLevel(1));
     public static BlockTable STONE_TABLE = new BlockTable("stone_table", Block.Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE).harvestLevel(1));
     public static UnderInstrumentsConstructionBlock WOODEN_UNDER_INSTRUMENTS_CONSTRUCTION_BLOCK = new UnderInstrumentsConstructionBlock("wooden_under_instruments_construction_block", Block.Properties.from(Blocks.OAK_PLANKS).hardnessAndResistance(3.0f));

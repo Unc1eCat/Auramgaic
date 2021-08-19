@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "type=bottom": { "model": "uc_auramagic:block/elderly_stone_slab" },
+    "type=top": { "model": "uc_auramagic:block/elderly_stone_slab_top" },
+    "type=double": { "model": "uc_auramagic:block/elderly_stone" }
+  }
+}
